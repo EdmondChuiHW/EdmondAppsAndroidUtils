@@ -3,14 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/ed__activity_margin_vertical"
+    android:paddingLeft="@dimen/ed__activity_margin_horizontal"
+    android:paddingRight="@dimen/ed__activity_margin_horizontal"
+    android:paddingTop="@dimen/ed__activity_margin_vertical" >
 
     <FrameLayout
         android:id="@+id/ed__frame_main"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="3" />
-    <FrameLayout
+
+    <FrameLayout
         android:id="@+id/ed__frame_detail"
         android:layout_width="0dp"
         android:layout_height="match_parent"

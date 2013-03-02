@@ -5,10 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.edmondapps.utils.android.annotaion.FragmentName;
 
 /**
  * A simple {@link SherlockFragmentActivity} which helps building an
  * {@code Activity} containing a single {@code Fragment}.
+ * <p/>
+ * Overriding {@link #onCreateFragment()} is all you needed.
+ * <p/>
+ * Although not necessary, it is strongly recommended to provide tags for the
+ * {@code Fragment} by annotating a {@link FragmentName} on its class.
  * 
  * @author Edmond
  * 
@@ -23,6 +29,9 @@ public abstract class SinglePaneActivity extends SherlockFragmentActivity {
 	private Fragment mFragment;
 	private int mFragmentLayoutId;
 
+	/**
+	 * Throws an Exception if super class implementation is not called.
+	 */
 	private void throwIfNotCalled() {
 		if (!mCalled) {
 			throw new RuntimeException("You must call through super class implementation.");
@@ -129,6 +138,9 @@ public abstract class SinglePaneActivity extends SherlockFragmentActivity {
 
 	/**
 	 * Called during {@code Activity} {@link #onCreate(Bundle)} if necessary.
+	 * <p/>
+	 * You should also supply a {@link FragmentName} to the target
+	 * {@code Fragment} for {@link #getFragment()} to function properly.
 	 * 
 	 * @see #getFragment()
 	 * @return a new instance of {@code Fragment}
@@ -136,33 +148,43 @@ public abstract class SinglePaneActivity extends SherlockFragmentActivity {
 	protected abstract Fragment onCreateFragment();
 
 	/**
+	 * <b>Most classes should use {@link FragmentName} on
+	 * the target {@code Fragment}.</b><br/>
+	 * This method is for advanced users, for example, to differentiate multiple
+	 * instances of the same {@code Fragment} class.
+	 * <p/>
 	 * Passed to {@code FragmentManager} for transactions and retrieval. <br />
-	 * This method is only called once during {@link #onCreate(Bundle)} and the
-	 * returned value is stored.
+	 * This method is guaranteed to be called after {@link #onCreateFragment()}.
+	 * </p>
+	 * The default implementation looks for the {@link FragmentName} Annotation.
+	 * You may override this method if you wish to return a dynamically
+	 * generated tag.
 	 * 
 	 * @see #getFragmentTag()
-	 * 
-	 * @return {@code null} by default; or an unique {@code String} to identify
-	 *         the {@code Fragment}.
+	 * @return an unique {@code String} to identify the {@code Fragment}.
 	 */
 	protected String onCreateFragmentTag() {
-		return null;
+		FragmentName tag = mFragment.getClass().getAnnotation(FragmentName.class);
+		return tag == null ? null : tag.value();
 	}
 
 	/**
+	 * You must supply a {@link FragmentName} to the target {@code Fragment}, or
+	 * override {@link #onCreateFragmentTag()} for this method to function
+	 * properly.
+	 * 
 	 * @return the stored {@code Fragment} returned by
 	 *         {@link #onCreateFragment()}.
 	 */
-	protected final Fragment getFragment() {
+	protected Fragment getFragment() {
 		return mFragment;
 	}
 
 	/**
 	 * 
-	 * @return the stored {@code String} returned by
-	 *         {@link #onCreateFragmentTag()}.
+	 * @return the stored {@code String} annotated by {@link FragmentName}.
 	 */
-	protected final String getFragmentTag() {
+	protected String getFragmentTag() {
 		return mFragmentTag;
 	}
 
@@ -170,7 +192,7 @@ public abstract class SinglePaneActivity extends SherlockFragmentActivity {
 	 * 
 	 * @return the stored {@code id} returned by {@link #onCreateFragmentId()}.
 	 */
-	protected final int getFragmentId() {
+	protected int getFragmentId() {
 		return mFragmentLayoutId;
 	}
 }

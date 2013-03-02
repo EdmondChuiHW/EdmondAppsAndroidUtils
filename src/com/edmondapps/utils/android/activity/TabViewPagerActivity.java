@@ -24,8 +24,8 @@ import com.edmondapps.utils.android.actionbar.SimpleTabListener;
  * 
  */
 public abstract class TabViewPagerActivity extends SherlockFragmentActivity {
-	private static final String KEY_VIEW_PAGER_POS = "view_pager_pos";
-	private static final String KEY_TAB_POS = "tab_pos";
+	private static final String KEY_VIEW_PAGER_POS = "ed__view_pager_pos";
+	private static final String KEY_TAB_POS = "ed__tab_pos";
 
 	private ViewPager mViewPager;
 	private PagerAdapter mPagerAdapter;
@@ -50,19 +50,22 @@ public abstract class TabViewPagerActivity extends SherlockFragmentActivity {
 	}
 
 	/**
-	 * Must only be called when {@link #mPagerAdapter} and {@link #mTabListener}
-	 * is not null.
+	 * {@link #mPagerAdapter} and {@link #mTabListener} must not be null.
 	 */
 	private void initTabs() {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		int count = mPagerAdapter.getCount();
 		for (int i = 0; i < count; i++) {
-			actionBar.addTab(actionBar
-					.newTab()
-					.setText(mPagerAdapter.getPageTitle(i))
-					.setTabListener(mTabListener));
+			actionBar.addTab(newTabForPosition(actionBar, i));
 		}
+	}
+
+	/**
+	 * {@link #mPagerAdapter} and {@link #mTabListener} must not be null.
+	 */
+	private Tab newTabForPosition(ActionBar actionBar, int pos) {
+		return actionBar.newTab().setText(mPagerAdapter.getPageTitle(pos)).setTabListener(mTabListener);
 	}
 
 	/**
@@ -153,7 +156,7 @@ public abstract class TabViewPagerActivity extends SherlockFragmentActivity {
 	 * @return the stored {@code PagerAdapter} returned by
 	 *         {@link #onCreatePagerAdapter()}
 	 */
-	protected final PagerAdapter getPagerAdapter() {
+	protected PagerAdapter getPagerAdapter() {
 		return mPagerAdapter;
 	}
 
@@ -161,7 +164,7 @@ public abstract class TabViewPagerActivity extends SherlockFragmentActivity {
 	 * 
 	 * @return the local {@code ViewPager} instance
 	 */
-	protected final ViewPager getViewPager() {
+	protected ViewPager getViewPager() {
 		return mViewPager;
 	}
 
@@ -170,7 +173,7 @@ public abstract class TabViewPagerActivity extends SherlockFragmentActivity {
 	 * @return the stored {@code TabListener} returned by
 	 *         {@link #onCreateTabListener()}
 	 */
-	protected final TabListener getTabListener() {
+	protected TabListener getTabListener() {
 		return mTabListener;
 	}
 
@@ -179,7 +182,7 @@ public abstract class TabViewPagerActivity extends SherlockFragmentActivity {
 	 * @return the stored {@code OnPageChangeListener} returned by
 	 *         {@link #onCreateOnPageChangeListener()}
 	 */
-	protected final OnPageChangeListener getOnPageChangeListener() {
+	protected OnPageChangeListener getOnPageChangeListener() {
 		return mOnPageChangeListener;
 	}
 }

@@ -4,8 +4,25 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.edmondapps.utils.android.R;
+import com.edmondapps.utils.android.annotaion.FragmentName;
 
+/**
+ * A simple {@link SherlockFragmentActivity} which helps building an
+ * {@code Activity} with dual-pane layout.
+ * <p/>
+ * Overriding {@link #onCreateFragment()} and {@link #onCreateDetailFragment()}
+ * is all you needed.
+ * 
+ * <p/>
+ * Although not necessary, it is strongly encouraged to provide tags for
+ * {@code Fragment}s by annotating a {@link FragmentName} on their classes.
+ * 
+ * 
+ * @author Edmond
+ * 
+ */
 public abstract class DualPaneActivity extends SinglePaneActivity {
 	private static final String KEY_DETAIL_FRAGMENT_TAG = "ed__detail_fragment_tag";
 	private static final String KEY_DETAIL_FRAGMENT_LAYOUT_ID = "ed__detail_fragment_layout_id";
@@ -32,27 +49,6 @@ public abstract class DualPaneActivity extends SinglePaneActivity {
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-
-		outState.putString(KEY_DETAIL_FRAGMENT_TAG, mDetailFragmentTag);
-		outState.putInt(KEY_DETAIL_FRAGMENT_LAYOUT_ID, mDetailFragmentId);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.edmondapps.utils.android.activity.SinglePaneActivity#onCreateFragment
-	 * ()
-	 */
-	@Override
-	protected Fragment onCreateFragment() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	protected void onFragmentTranscation(FragmentTransaction ft) {
 		super.onFragmentTranscation(ft);
 
@@ -61,6 +57,14 @@ public abstract class DualPaneActivity extends SinglePaneActivity {
 		mDetailFragmentTag = onCreateDetailFragmentTag();
 
 		ft.add(mDetailFragmentId, mDetailFragment, mDetailFragmentTag);
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		outState.putString(KEY_DETAIL_FRAGMENT_TAG, mDetailFragmentTag);
+		outState.putInt(KEY_DETAIL_FRAGMENT_LAYOUT_ID, mDetailFragmentId);
 	}
 
 	@Override
@@ -75,9 +79,7 @@ public abstract class DualPaneActivity extends SinglePaneActivity {
 	}
 
 	/**
-	 * 
-	 * 
-	 * @see SinglePaneActivity#onCreateFragmentId ()
+	 * @see #onCreateFragmentId()
 	 */
 	protected int onCreateDetailFragmentId() {
 		throw new UnsupportedOperationException("You must override onCreateDetailFragmentId() if you override onCreateContentViewId().");
@@ -93,17 +95,25 @@ public abstract class DualPaneActivity extends SinglePaneActivity {
 	protected abstract Fragment onCreateDetailFragment();
 
 	/**
+	 * <b>Most classes should use {@link FragmentName} on
+	 * the target {@code Fragment.}</b><br/>
+	 * This method is for advanced users, for example, to differentiate multiple
+	 * instances of the same {@code Fragment} class.
+	 * <p/>
 	 * Passed to {@code FragmentManager} for transactions and retrieval. <br />
-	 * This method is only called once during {@link #onCreate(Bundle)} and the
-	 * returned value is stored.
+	 * This method is guaranteed to be called after
+	 * {@link #onCreateDetailFragment()}.
+	 * </p>
+	 * The default implementation looks for the {@link FragmentName} Annotation.
+	 * You may override this method if you wish to return a dynamically
+	 * generated {@code String}.
 	 * 
-	 * @see #onCreateFragmentTag()
-	 * 
-	 * @return {@code null} by default; or an unique {@code String} to identify
-	 *         the detail {@code Fragment}.
+	 * @see #getDetailFragmentTag()
+	 * @return an unique {@code String} to identify the detail {@code Fragment}.
 	 */
 	protected String onCreateDetailFragmentTag() {
-		return null;
+		FragmentName tag = mDetailFragment.getClass().getAnnotation(FragmentName.class);
+		return tag == null ? null : tag.value();
 	}
 
 	/**
@@ -111,25 +121,30 @@ public abstract class DualPaneActivity extends SinglePaneActivity {
 	 * @return the stored {@code id} returned by
 	 *         {@link #onCreateDetailFragmentId()}.
 	 */
-	protected final int getDetailFragmentId() {
+	protected int getDetailFragmentId() {
 		return mDetailFragmentId;
 	}
 
 	/**
 	 * @see #getFragmentTag()
-	 * @return the stored {@code String} returned by
-	 *         {@link #onCreateDetailFragmentTag()}.
+	 * @return the stored {@code String} annotated by {@link FragmentName}.
 	 */
-	protected final String getDetailFragmentTag() {
+	protected String getDetailFragmentTag() {
 		return mDetailFragmentTag;
 	}
 
 	/**
+	 * 
+	 * You must annotate a {@link FragmentName} on
+	 * the target {@code Fragment}, or override {@link #onCreateFragmentTag()}
+	 * for this method to function properly.
+	 * 
 	 * @see #getFragment()
+	 * 
 	 * @return the stored {@code Fragment} returned by
 	 *         {@link #onCreateDetailFragment()}.
 	 */
-	protected final Fragment getDetailFragment() {
+	protected Fragment getDetailFragment() {
 		return mDetailFragment;
 	}
 }

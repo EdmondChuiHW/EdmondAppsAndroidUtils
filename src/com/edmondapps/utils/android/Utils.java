@@ -4,7 +4,7 @@ import android.os.Build;
 
 public final class Utils {
 	private Utils() {
-		throw new AssertionError();
+		throw new AssertionError("nice try");
 	}
 
 	public static boolean hasHoneyComb() {
