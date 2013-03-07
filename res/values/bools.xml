@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="ed__has_7_inch">false</bool>
+    <bool name="ed__has_10_inch">false</bool>
+
+</resources>

@@ -82,7 +82,7 @@ public abstract class DualPaneActivity extends SinglePaneActivity {
 	 * @see #onCreateFragmentId()
 	 */
 	protected int onCreateDetailFragmentId() {
-		throw new UnsupportedOperationException("You must override onCreateDetailFragmentId() if you override onCreateContentViewId().");
+		throw new UnsupportedOperationException("You must override onCreateDetailFragmentId() if you have overriden onCreateContentViewId().");
 	}
 
 	/**

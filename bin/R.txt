@@ -101,6 +101,10 @@ int bool abs__config_actionMenuItemAllCaps 0x7f050004
 int bool abs__config_allowActionMenuItemTextWithIcon 0x7f050005
 int bool abs__config_showMenuShortcutsWhenKeyboardPresent 0x7f050003
 int bool abs__split_action_bar_is_narrow 0x7f050001
+int bool ed__has_10_inch 0x7f050007
+int bool ed__has_7_inch 0x7f050006
+int bool has_10_inch 0x7f050009
+int bool has_7_inch 0x7f050008
 int color abs__background_holo_dark 0x7f060000
 int color abs__background_holo_light 0x7f060001
 int color abs__bright_foreground_disabled_holo_dark 0x7f060004
@@ -133,6 +137,12 @@ int dimen abs__search_view_text_min_width 0x7f07000e
 int dimen action_button_min_width 0x7f070010
 int dimen ed__activity_margin_horizontal 0x7f070011
 int dimen ed__activity_margin_vertical 0x7f070012
+int dimen ed__padding_medium 0x7f070014
+int dimen ed__padding_small 0x7f070013
+int dimen ed__textsize_large 0x7f070018
+int dimen ed__textsize_medium 0x7f070017
+int dimen ed__textsize_micro 0x7f070015
+int dimen ed__textsize_small 0x7f070016
 int drawable abs__ab_bottom_solid_dark_holo 0x7f020000
 int drawable abs__ab_bottom_solid_inverse_holo 0x7f020001
 int drawable abs__ab_bottom_solid_light_holo 0x7f020002
@@ -341,7 +351,6 @@ int string abs__searchview_description_voice 0x7f09000e
 int string abs__share_action_provider_share_with 0x7f090006
 int string abs__shareactionprovider_share_with 0x7f090008
 int string abs__shareactionprovider_share_with_application 0x7f090009
-int string app_name 0x7f09000f
 int style AppBaseTheme 0x7f0a0059
 int style AppTheme 0x7f0a005a
 int style DialogWindowTitle_Sherlock 0x7f0a0036

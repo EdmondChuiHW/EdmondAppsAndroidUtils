@@ -134,7 +134,7 @@ public abstract class AbstractAsyncFragment<Params, Progress, Result> extends Sh
 		super.onDestroy();
 
 		if (mCancelTaskOnDestroy && (mAsyncTask != null)) {
-			mAsyncTask.cancel(false);
+			mAsyncTask.cancel(true);
 			mAsyncTask = null;
 		}
 	}

@@ -13,12 +13,12 @@
         android:id="@+id/ed__frame_main"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:layout_weight="3.5" />
 
     <FrameLayout
         android:id="@+id/ed__frame_detail"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="7" />
+        android:layout_weight="5.5" />
 
 </LinearLayout>

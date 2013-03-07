@@ -674,6 +674,10 @@ containing a value of this type.
          */
         public static int abs__config_showMenuShortcutsWhenKeyboardPresent=0x7f050003;
         public static int abs__split_action_bar_is_narrow=0x7f050001;
+        public static int ed__has_10_inch=0x7f050007;
+        public static int ed__has_7_inch=0x7f050006;
+        public static int has_10_inch=0x7f050009;
+        public static int has_7_inch=0x7f050008;
     }
     public static final class color {
         public static int abs__background_holo_dark=0x7f060000;
@@ -806,6 +810,12 @@ containing a value of this type.
         public static int action_button_min_width=0x7f070010;
         public static int ed__activity_margin_horizontal=0x7f070011;
         public static int ed__activity_margin_vertical=0x7f070012;
+        public static int ed__padding_medium=0x7f070014;
+        public static int ed__padding_small=0x7f070013;
+        public static int ed__textsize_large=0x7f070018;
+        public static int ed__textsize_medium=0x7f070017;
+        public static int ed__textsize_micro=0x7f070015;
+        public static int ed__textsize_small=0x7f070016;
     }
     public static final class drawable {
         public static int abs__ab_bottom_solid_dark_holo=0x7f020000;
@@ -1054,7 +1064,6 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static int abs__shareactionprovider_share_with_application=0x7f090009;
-        public static int app_name=0x7f09000f;
     }
     public static final class style {
         /** 
