@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.edmondapps.utils.android.R;
 import com.edmondapps.utils.android.actionbar.SimpleTabListener;
 
@@ -23,7 +22,7 @@ import com.edmondapps.utils.android.actionbar.SimpleTabListener;
  * @author Edmond
  * 
  */
-public abstract class TabViewPagerActivity extends SherlockFragmentActivity {
+public abstract class TabViewPagerActivity extends UpableActivity {
 	private static final String KEY_VIEW_PAGER_POS = "ed__view_pager_pos";
 	private static final String KEY_TAB_POS = "ed__tab_pos";
 

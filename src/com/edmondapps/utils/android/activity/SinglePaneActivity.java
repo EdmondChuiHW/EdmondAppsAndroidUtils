@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.edmondapps.utils.android.annotaion.FragmentName;
 
 /**
- * A simple {@link SherlockFragmentActivity} which helps building an
- * {@code Activity} containing a single {@code Fragment}.
+ * A simple {@link UpableActivity} which helps building an {@code Activity}
+ * containing a single {@code Fragment}.
  * <p/>
  * Overriding {@link #onCreateFragment()} is all you needed.
  * <p/>
@@ -19,7 +18,7 @@ import com.edmondapps.utils.android.annotaion.FragmentName;
  * @author Edmond
  * 
  */
-public abstract class SinglePaneActivity extends SherlockFragmentActivity {
+public abstract class SinglePaneActivity extends UpableActivity {
 	private static final String KEY_FRAGMENT_TAG = "ed__fragment_tag";
 	private static final String KEY_FRAGMENT_LAYOUT_ID = "ed__fragment_layout_id";
 

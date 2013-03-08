@@ -4,13 +4,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.edmondapps.utils.android.R;
 import com.edmondapps.utils.android.annotaion.FragmentName;
 
 /**
- * A simple {@link SherlockFragmentActivity} which helps building an
- * {@code Activity} with dual-pane layout.
+ * A simple {@link UpableActivity} which helps building an {@code Activity} with
+ * dual-pane layout.
  * <p/>
  * Overriding {@link #onCreateFragment()} and {@link #onCreateDetailFragment()}
  * is all you needed.
