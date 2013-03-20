@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import com.edmondapps.utils.android.R;
 import com.edmondapps.utils.android.annotaion.FragmentName;
 
 /**
@@ -23,7 +24,6 @@ public abstract class SinglePaneActivity extends UpableActivity {
 	private static final String KEY_FRAGMENT_LAYOUT_ID = "ed__fragment_layout_id";
 
 	private boolean mCalled;
-	private boolean isCustomLayout;
 	private String mFragmentTag;
 	private Fragment mFragment;
 	private int mFragmentLayoutId;
@@ -48,14 +48,11 @@ public abstract class SinglePaneActivity extends UpableActivity {
 	@Override
 	protected void onCreate(Bundle savedState) {
 		super.onCreate(savedState);
-		int contentViewId = onCreateContentViewId();
-		if (contentViewId > 0) {
-			isCustomLayout = true;
-			setContentView(contentViewId);
-		}
+
+		setContentView(onCreateContentViewId());
 
 		if (savedState == null) {
-			mFragmentLayoutId = isCustomLayout ? onCreateFragmentId() : android.R.id.content;
+			mFragmentLayoutId = onCreateFragmentId();
 			mFragment = onCreateFragment();
 			mFragmentTag = onCreateFragmentTag();
 
@@ -80,16 +77,16 @@ public abstract class SinglePaneActivity extends UpableActivity {
 	}
 
 	/**
-	 * Called during {@link #onCreate(Bundle)}, clients may override this
-	 * method to if they wish to use a custom layout. If you do supply a custom
-	 * layout, you must also override {@link #onCreateFragmentId()} or an
-	 * Exception will be thrown.
+	 * Called during every time {@link #onCreate(Bundle)} is invoked, clients
+	 * may override this method if a custom layout is supplied. If you do
+	 * supply a custom layout, you must also override
+	 * {@link #onCreateFragmentId()} or an
+	 * error may occur.
 	 * 
-	 * @return an layout {@code id > 0} or {@link #onCreateFragmentId()} will
-	 *         not be invoked.
+	 * @return an id of {@code R.layout.*}
 	 */
 	protected int onCreateContentViewId() {
-		return 0;
+		return R.layout.ed__layout_single_pane;
 	}
 
 	/**
@@ -109,7 +106,7 @@ public abstract class SinglePaneActivity extends UpableActivity {
 	}
 
 	/**
-	 * Called during {@link #onCreate(Bundle)}.
+	 * Called during {@link #onCreate(Bundle)} if necessary.
 	 * 
 	 * Clients must override this method if a custom layout is supplied by
 	 * {@link #onCreateContentViewId()}.
@@ -117,7 +114,7 @@ public abstract class SinglePaneActivity extends UpableActivity {
 	 * @return an {@code id} for the {@code Fragment} to be placed in
 	 */
 	protected int onCreateFragmentId() {
-		throw new UnsupportedOperationException("You must override onCreateFragmentId() if you override onCreateContentViewId(). ");
+		return R.id.ed__frame_main;
 	}
 
 	/**

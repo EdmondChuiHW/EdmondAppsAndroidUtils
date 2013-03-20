@@ -676,8 +676,6 @@ containing a value of this type.
         public static int abs__split_action_bar_is_narrow=0x7f050001;
         public static int ed__has_10_inch=0x7f050007;
         public static int ed__has_7_inch=0x7f050006;
-        public static int has_10_inch=0x7f050009;
-        public static int has_7_inch=0x7f050008;
     }
     public static final class color {
         public static int abs__background_holo_dark=0x7f060000;
@@ -1014,9 +1012,10 @@ containing a value of this type.
         public static int abs__search_view=0x7f030015;
         public static int abs__simple_dropdown_hint=0x7f030016;
         public static int ed__layout_dual_pane=0x7f030017;
-        public static int ed__layout_view_pager=0x7f030018;
-        public static int sherlock_spinner_dropdown_item=0x7f030019;
-        public static int sherlock_spinner_item=0x7f03001a;
+        public static int ed__layout_single_pane=0x7f030018;
+        public static int ed__layout_view_pager=0x7f030019;
+        public static int sherlock_spinner_dropdown_item=0x7f03001a;
+        public static int sherlock_spinner_item=0x7f03001b;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
