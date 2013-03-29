@@ -1,6 +1,22 @@
+/*
+ * Copyright 2013 Edmond Chui
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.edmondapps.utils.android.database;
 
 import java.io.Closeable;
+import java.util.Arrays;
 
 import android.database.Cursor;
 import android.text.TextUtils;
@@ -14,12 +30,10 @@ public abstract class DatabaseFilter extends Filter implements Closeable {
 	private final Database<?> mDatabase;
 	private final String[] mColumns;
 
-	protected DatabaseFilter(Database<?> database, String... columns) {
-		if ( (columns == null) || (columns.length <= 0)) {
-			throw new NullPointerException("columns must not be null");
-		}
+	protected DatabaseFilter(Database<?> database, String col, String... columns) {
 		mDatabase = database;
-		mColumns = columns;
+		mColumns = Arrays.copyOf(columns, columns.length + 1);
+		mColumns[columns.length - 1] = col;
 	}
 
 	@Override

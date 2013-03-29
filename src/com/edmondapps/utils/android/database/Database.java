@@ -1,3 +1,22 @@
+/*
+ * Copyright 2013 Edmond Chui
+ * 
+ * Licenseimport java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
+S,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.edmondapps.utils.android.database;
 
 import java.util.ArrayList;
@@ -43,14 +62,14 @@ public abstract class Database<T extends DatabaseEntry> extends SQLiteOpenHelper
 	 *            a non-null {@link DatabaseTable}
 	 */
 	public Database(Context context, DatabaseTable table) {
-		this(context, table.getTableName(), table.getTableVersion());
+		this(context, DatabaseUtils.sqlEscapeString(table.getTableName()), table.getTableVersion());
 		mTable = table;
 	}
 
-	private Database(Context context, String name, int version) {
-		super(context, name = DatabaseUtils.sqlEscapeString(name), null, version);
+	private Database(Context context, String escapedName, int version) {
+		super(context, escapedName, null, version);
 		mContext = context;
-		mName = name;
+		mName = escapedName;
 	}
 
 	/**
