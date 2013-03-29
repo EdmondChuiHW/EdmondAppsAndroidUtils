@@ -4,8 +4,8 @@ This is an Android library which aimed to reduce common boiler-plate code.
 This library covers logging, Activities, Fragments, SQLite databases, asynchronous operations, JSON, animations and more.  
 
 All commits to the master branch include Javadoc.  
-It is under active development so the API is not frozen yet.  
-Detailed documentation will indicate binary-incompatiable changes in future commits.  
+This lirary is under active development so the API is not frozen yet.  
+Detailed documentation will indicate any binary-incompatiable changes in future commits.  
 
 I am 17-years-old student, so please tell me if you have any suggetions/comments on my code.  
 
