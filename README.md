@@ -67,7 +67,7 @@ Dependencies
 [2]: https://github.com/JakeWharton/NineOldAndroids
 [3]: https://code.google.com/p/google-gson/
 [4]: https://github.com/chuihinwai/EdmondAppsAndroidUtilsSample
-[5]: https://play.google.com/store
+[5]: https://play.google.com/store/apps/details?id=com.edmondapps.android.sample
 
 Developed By
 ======================
