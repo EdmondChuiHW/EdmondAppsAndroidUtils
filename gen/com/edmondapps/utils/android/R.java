@@ -1180,6 +1180,7 @@ containing a value of this type.
         public static int Widget_Sherlock_SearchAutoCompleteTextView=0x7f0a0034;
         public static int Widget_Sherlock_Spinner_DropDown_ActionBar=0x7f0a0024;
         public static int Widget_Sherlock_TextView_SpinnerItem=0x7f0a0032;
+        public static int ed__styleActivityMargin=0x7f0a005b;
     }
     public static final class styleable {
         /**  Attributes used to style the Action Bar. 
