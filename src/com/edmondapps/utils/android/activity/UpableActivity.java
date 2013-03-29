@@ -27,8 +27,8 @@ public abstract class UpableActivity extends SherlockFragmentActivity {
 	private ParentActivity mUpAnnotaion;
 
 	@Override
-	protected void onCreate(Bundle b) {
-		super.onCreate(b);
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		mUpAnnotaion = getClass().getAnnotation(ParentActivity.class);
 		if (mUpAnnotaion != null) {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,8 +41,7 @@ public abstract class UpableActivity extends SherlockFragmentActivity {
 			case android.R.id.home:
 				if (!onUpPressed()) {
 					if (mUpAnnotaion != null) {
-						Intent upIntent = getUpIntent(mUpAnnotaion.value());
-						startActivity(upIntent);
+						startActivity(getUpIntent(mUpAnnotaion.value()));
 						finish();
 						return true;
 					}
@@ -73,7 +72,9 @@ public abstract class UpableActivity extends SherlockFragmentActivity {
 	 */
 	protected Intent getUpIntent(Class<? extends Activity> activity) {
 		Intent intent = new Intent(this, activity);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+				Intent.FLAG_ACTIVITY_SINGLE_TOP |
+				Intent.FLAG_ACTIVITY_NEW_TASK);
 		return intent;
 	}
 }

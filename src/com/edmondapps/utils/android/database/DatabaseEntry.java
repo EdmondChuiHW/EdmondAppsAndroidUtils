@@ -2,8 +2,16 @@ package com.edmondapps.utils.android.database;
 
 import android.content.ContentValues;
 
-import com.edmondapps.utils.CollectionUtils.Identifiable;
+import com.edmondapps.utils.java.Identifiable;
 
-public interface DatabaseEntry<D extends DatabaseTable<?>> extends Identifiable {
-	ContentValues toContentValues(D db);
+/**
+ * Interface that works with {@link Database}.
+ * </br>
+ * A {@code DatabaseEntry} represents a row in a database.
+ * 
+ * @author Edmond
+ * 
+ */
+public interface DatabaseEntry extends Identifiable {
+	ContentValues toContentValues(DatabaseTable db);
 }

@@ -441,6 +441,7 @@ int style Widget_Sherlock_ProgressBar_Horizontal 0x7f0a0030
 int style Widget_Sherlock_SearchAutoCompleteTextView 0x7f0a0034
 int style Widget_Sherlock_Spinner_DropDown_ActionBar 0x7f0a0024
 int style Widget_Sherlock_TextView_SpinnerItem 0x7f0a0032
+int style ed__styleActivityMargin 0x7f0a005b
 int[] styleable SherlockActionBar { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010048, 0x7f010049, 0x7f01004a, 0x7f01004b, 0x7f01004c, 0x7f01004d, 0x7f01004e, 0x7f01004f, 0x7f010050, 0x7f010051, 0x7f010052, 0x7f010053, 0x7f010054 }
 int styleable SherlockActionBar_background 2
 int styleable SherlockActionBar_backgroundSplit 3

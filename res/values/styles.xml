@@ -17,4 +17,10 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="ed__styleActivityMargin">
+        <item name="android:paddingBottom">@dimen/ed__activity_margin_vertical</item>
+        <item name="android:paddingLeft">@dimen/ed__activity_margin_horizontal</item>
+        <item name="android:paddingRight">@dimen/ed__activity_margin_horizontal</item>
+        <item name="android:paddingTop">@dimen/ed__activity_margin_vertical</item>
+    </style>
 </resources>

@@ -47,7 +47,7 @@ public abstract class AbstractAsyncFragment<Params, Progress, Result> extends Sh
 
 	private void onExecuteAsyncTask(AsyncTask<Params, Progress, Result> asyncTask) {
 		if (mAsyncTask != null) {
-			mAsyncTask.cancel(true);
+			mAsyncTask.cancel(false);
 		}
 		mAsyncTask = asyncTask;
 		asyncTask.execute(onCreateAsyncTaskParams(asyncTask));
@@ -58,7 +58,7 @@ public abstract class AbstractAsyncFragment<Params, Progress, Result> extends Sh
 	 * function properly.
 	 */
 	@Override
-	public void setRetainInstance(boolean retain) {
+	public final void setRetainInstance(boolean retain) {
 		throw new UnsupportedOperationException("It is necessary to retain instance for this class to function properly.");
 	}
 
@@ -134,7 +134,7 @@ public abstract class AbstractAsyncFragment<Params, Progress, Result> extends Sh
 		super.onDestroy();
 
 		if (mCancelTaskOnDestroy && (mAsyncTask != null)) {
-			mAsyncTask.cancel(true);
+			mAsyncTask.cancel(false);
 			mAsyncTask = null;
 		}
 	}

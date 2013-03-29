@@ -49,10 +49,10 @@ public abstract class SinglePaneActivity extends UpableActivity {
 	protected void onCreate(Bundle savedState) {
 		super.onCreate(savedState);
 
-		setContentView(onCreateContentViewId());
+		setContentView(onCreateLayoutId());
 
 		if (savedState == null) {
-			mFragmentLayoutId = onCreateFragmentId();
+			mFragmentLayoutId = onCreateFragmentLayoutId();
 			mFragment = onCreateFragment();
 			mFragmentTag = onCreateFragmentTag();
 
@@ -80,12 +80,12 @@ public abstract class SinglePaneActivity extends UpableActivity {
 	 * Called during every time {@link #onCreate(Bundle)} is invoked, clients
 	 * may override this method if a custom layout is supplied. If you do
 	 * supply a custom layout, you must also override
-	 * {@link #onCreateFragmentId()} or an
+	 * {@link #onCreateFragmentLayoutId()} or an
 	 * error may occur.
 	 * 
 	 * @return an id of {@code R.layout.*}
 	 */
-	protected int onCreateContentViewId() {
+	protected int onCreateLayoutId() {
 		return R.layout.ed__layout_single_pane;
 	}
 
@@ -95,7 +95,7 @@ public abstract class SinglePaneActivity extends UpableActivity {
 	 * <br/>
 	 * <i>Derived classes must call the
 	 * super class's implementation of this method. If they do not, an
-	 * exception will be thrown.<i/>
+	 * exception will be thrown.</i>
 	 * 
 	 * @param t
 	 *            A {@link FragmentTransaction} to be committed right after this
@@ -109,11 +109,11 @@ public abstract class SinglePaneActivity extends UpableActivity {
 	 * Called during {@link #onCreate(Bundle)} if necessary.
 	 * 
 	 * Clients must override this method if a custom layout is supplied by
-	 * {@link #onCreateContentViewId()}.
+	 * {@link #onCreateLayoutId()}.
 	 * 
 	 * @return an {@code id} for the {@code Fragment} to be placed in
 	 */
-	protected int onCreateFragmentId() {
+	protected int onCreateFragmentLayoutId() {
 		return R.id.ed__frame_main;
 	}
 
@@ -186,7 +186,7 @@ public abstract class SinglePaneActivity extends UpableActivity {
 
 	/**
 	 * 
-	 * @return the stored {@code id} returned by {@link #onCreateFragmentId()}.
+	 * @return the stored {@code id} returned by {@link #onCreateFragmentLayoutId()}.
 	 */
 	protected int getFragmentId() {
 		return mFragmentLayoutId;

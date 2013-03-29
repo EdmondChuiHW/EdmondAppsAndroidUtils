@@ -67,18 +67,18 @@ public abstract class DualPaneActivity extends SinglePaneActivity {
 	}
 
 	@Override
-	protected int onCreateContentViewId() {
+	protected int onCreateLayoutId() {
 		isCustomLayout = false;
 		return R.layout.ed__layout_dual_pane;
 	}
 
 	@Override
-	protected int onCreateFragmentId() {
+	protected int onCreateFragmentLayoutId() {
 		return R.id.ed__frame_main;
 	}
 
 	/**
-	 * @see #onCreateFragmentId()
+	 * @see #onCreateFragmentLayoutId()
 	 */
 	protected int onCreateDetailFragmentId() {
 		throw new UnsupportedOperationException("You must override onCreateDetailFragmentId() if you have overriden onCreateContentViewId().");
