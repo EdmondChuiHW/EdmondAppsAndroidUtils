@@ -55,7 +55,7 @@ public class PresidentActivity extends UpableActivity {
 
 More
 ----------------------
-Check out the [sample app] [4] on the [Play store (soon)] [5].  
+Check out the [sample app] [4] on the [Play store] [5].  
 
 Dependencies
 ======================
