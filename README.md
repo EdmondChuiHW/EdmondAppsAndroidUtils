@@ -11,8 +11,6 @@ I am 17-years-old student, so please tell me if you have any suggetions/comments
 
 Samples
 ======================
-You may check out the [sample app] [4] on the [Play store (soon)] [5].  
-
 Basic
 ----------------------
 Simple API Level check:
@@ -23,15 +21,13 @@ if(hasHoneyComb()) {
 }
 ```
 
-Activity & Fragments
+Easy Fragments intergration
 ----------------------
-SinglePaneActvity:
+Automatic Fragment tags:
 ```
-public class PresidentsActivity extends SinglePaneActivity {
-   @Override
-   protected Fragment onCreateFragment() {
-       return new PresidentsFragment();
-   }
+@FragmentName("MyUniqueStringTag")
+public class PresidentFragment extends SherlockFragment{
+  // That's all you need!
 }
 ```
 DualPaneActivity:
@@ -48,17 +44,34 @@ public class MainTabletActivity extends DualPaneActivity {
   }
 }
 ```
+Automatic "UP" navigation
+----------------------
+```
+@ParentActivity(PresidentsActivity.class)
+public class PresidentActivity extends SinglePaneActivity {
+  // That's all you need!
+}
+```
+
+More
+----------------------
+Check out the [sample app] [4] on the [Play store (soon)] [5].  
+
 Dependencies
 ======================
-[ActionBarSherlock] [1]  
-[NineOldAndroids] [2]  
-[google-gson] [3]  
+* [ActionBarSherlock] [1]  
+* [NineOldAndroids] [2]  
+* [google-gson] [3]  
 
 [1]: https://github.com/JakeWharton/ActionBarSherlock
 [2]: https://github.com/JakeWharton/NineOldAndroids
 [3]: https://code.google.com/p/google-gson/
 [4]: https://github.com/chuihinwai/EdmondAppsAndroidUtilsSample
 [5]: https://play.google.com/store
+
+Developed By
+======================
+* Edmond Chui - <chui.hinwai@gmail.com>
 
 License
 ======================
