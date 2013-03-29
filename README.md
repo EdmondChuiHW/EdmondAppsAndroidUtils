@@ -11,7 +11,7 @@ I am 17-years-old student, so please tell me if you have any suggetions/comments
 
 Samples
 ======================
-You may check out the [sample app] [4] on the [Play store] [5].  
+You may check out the [sample app] [4] on the [Play store (soon)] [5].  
 
 Basic
 ----------------------
@@ -58,7 +58,7 @@ Dependencies
 [2]: https://github.com/JakeWharton/NineOldAndroids
 [3]: https://code.google.com/p/google-gson/
 [4]: https://github.com/chuihinwai/EdmondAppsAndroidUtilsSample
-[4]: https://play.google.com/store
+[5]: https://play.google.com/store
 
 License
 ======================
