@@ -48,7 +48,7 @@ Automatic "UP" navigation
 ----------------------
 ```
 @ParentActivity(PresidentsActivity.class)
-public class PresidentActivity extends SinglePaneActivity {
+public class PresidentActivity extends UpableActivity {
   // That's all you need!
 }
 ```
