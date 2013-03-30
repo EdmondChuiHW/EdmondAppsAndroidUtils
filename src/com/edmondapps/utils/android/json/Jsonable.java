@@ -24,11 +24,11 @@ import com.google.gson.JsonObject;
  * 
  */
 public interface Jsonable {
-	/**
-	 * The returned JSON should be descriptive enough to re-create the object
-	 * with a {@link JsonBuilder}.
-	 * 
-	 * @return a {@link JsonObject} that represents the object
-	 */
-	JsonObject toJson();
+    /**
+     * The returned JSON should be descriptive enough to re-create the object
+     * with a {@link JsonBuilder}.
+     * 
+     * @return a {@link JsonObject} that represents the object
+     */
+    JsonObject toJson();
 }

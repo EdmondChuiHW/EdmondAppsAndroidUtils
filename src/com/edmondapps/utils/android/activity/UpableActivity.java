@@ -39,57 +39,57 @@ import com.edmondapps.utils.android.annotaion.ParentActivity;
  */
 public abstract class UpableActivity extends SherlockFragmentActivity {
 
-	private ParentActivity mUpAnnotaion;
+    private ParentActivity mUpAnnotaion;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		mUpAnnotaion = getClass().getAnnotation(ParentActivity.class);
-		if (mUpAnnotaion != null) {
-			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		}
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mUpAnnotaion = getClass().getAnnotation(ParentActivity.class);
+        if (mUpAnnotaion != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case android.R.id.home:
-				if (!onUpPressed()) {
-					if (mUpAnnotaion != null) {
-						startActivity(getUpIntent(mUpAnnotaion.value()));
-						finish();
-						return true;
-					}
-				}
-		}
-		return super.onOptionsItemSelected(item);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (!onUpPressed()) {
+                    if (mUpAnnotaion != null) {
+                        startActivity(getUpIntent(mUpAnnotaion.value()));
+                        finish();
+                        return true;
+                    }
+                }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-	/**
-	 * Called every time the "up" button is selected.<br/>
-	 * The class does not need to have a {@link ParentActivity} annotated.
-	 * 
-	 * @return true if this event is consumed
-	 */
-	protected boolean onUpPressed() {
-		return false;
-	}
+    /**
+     * Called every time the "up" button is selected.<br/>
+     * The class does not need to have a {@link ParentActivity} annotated.
+     * 
+     * @return true if this event is consumed
+     */
+    protected boolean onUpPressed() {
+        return false;
+    }
 
-	/**
-	 * Subclasses may override this method to return a custom {@link Intent}.
-	 * This is called every time {@link #onUpPressed()} returns false.
-	 * 
-	 * @param activity
-	 *            as defined by {@link ParentActivity}
-	 * @return
-	 *         a non-null {@code Activity} {@link Intent} which will be passed
-	 *         to {@link #startActivity(Intent)}.
-	 */
-	protected Intent getUpIntent(Class<? extends Activity> activity) {
-		Intent intent = new Intent(this, activity);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-				Intent.FLAG_ACTIVITY_SINGLE_TOP |
-				Intent.FLAG_ACTIVITY_NEW_TASK);
-		return intent;
-	}
+    /**
+     * Subclasses may override this method to return a custom {@link Intent}.
+     * This is called every time {@link #onUpPressed()} returns false.
+     * 
+     * @param activity
+     *            as defined by {@link ParentActivity}
+     * @return
+     *         a non-null {@code Activity} {@link Intent} which will be passed
+     *         to {@link #startActivity(Intent)}.
+     */
+    protected Intent getUpIntent(Class<? extends Activity> activity) {
+        Intent intent = new Intent(this, activity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
+    }
 }

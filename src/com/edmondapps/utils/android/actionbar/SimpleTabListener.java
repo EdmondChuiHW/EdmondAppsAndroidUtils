@@ -29,15 +29,15 @@ import com.actionbarsherlock.app.ActionBar.TabListener;
  * @see SimpleOnPageChangeListener
  */
 public class SimpleTabListener implements TabListener {
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-	}
+    @Override
+    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+    }
 
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-	}
+    @Override
+    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+    }
 
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-	}
+    @Override
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+    }
 }

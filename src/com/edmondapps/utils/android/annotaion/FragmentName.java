@@ -42,8 +42,8 @@ import com.edmondapps.utils.android.activity.SinglePaneActivity;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface FragmentName {
-	/**
-	 * {@code String} to identify the {@code Fragment}.
-	 */
-	String value();
+    /**
+     * {@code String} to identify the {@code Fragment}.
+     */
+    String value();
 }

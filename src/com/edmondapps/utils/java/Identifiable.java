@@ -26,9 +26,9 @@ import com.edmondapps.utils.android.database.Database;
  * 
  */
 public interface Identifiable {
-	/**
-	 * 
-	 * @return an unique identifier of the object
-	 */
-	long getId();
+    /**
+     * 
+     * @return an unique identifier of the object
+     */
+    long getId();
 }

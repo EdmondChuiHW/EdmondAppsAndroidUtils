@@ -35,5 +35,5 @@ import com.edmondapps.utils.android.activity.UpableActivity;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ParentActivity {
-	Class<? extends Activity> value();
+    Class<? extends Activity> value();
 }

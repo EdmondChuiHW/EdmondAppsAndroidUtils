@@ -28,5 +28,5 @@ import com.edmondapps.utils.java.Identifiable;
  * 
  */
 public interface DatabaseEntry extends Identifiable {
-	ContentValues toContentValues(DatabaseTable db);
+    ContentValues toContentValues(DatabaseTable db);
 }
