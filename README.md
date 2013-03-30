@@ -4,10 +4,10 @@ This is an Android library which aimed to reduce common boiler-plate code.
 This library covers logging, Activities, Fragments, SQLite databases, asynchronous operations, JSON, animations and more.  
 
 All commits to the master branch include Javadoc.  
-It is under active development so the API is not frozen yet.  
-Detailed documentation will indicate binary-incompatiable changes in future commits.  
+This lirary is under active development so the API is not frozen yet.  
+Detailed documentation will indicate any binary-incompatiable changes in future commits.  
 
-I am 17-years-old student, so please tell me if you have any suggetions/comments on my code.  
+I am student, so please tell me if you have any suggetions/comments on my code.  
 
 Samples
 ======================
@@ -48,14 +48,14 @@ Automatic "UP" navigation
 ----------------------
 ```
 @ParentActivity(PresidentsActivity.class)
-public class PresidentActivity extends SinglePaneActivity {
+public class PresidentActivity extends UpableActivity {
   // That's all you need!
 }
 ```
 
 More
 ----------------------
-Check out the [sample app] [4] on the [Play store (soon)] [5].  
+Check out the [sample app] [4] on the [Play store] [5].  
 
 Dependencies
 ======================
