@@ -24,6 +24,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import android.database.Cursor;
+
 /**
  * Collection of common boiler-plates involving I/O operations.
  * 
@@ -106,6 +108,23 @@ public final class IoUtils {
             } catch (IOException e) {
                 // intended to ignore
             }
+        }
+    }
+
+    /**
+     * Directly closes the {@code Cursor} with its {@code close()} method. This
+     * method is intended to overload {@link #quietClose(Closeable)} since older
+     * versions of the {@link Cursor} class does not implement {@link Closeable}
+     * .
+     * <p/>
+     * Should generally be used inside a {@code finally} block.
+     * 
+     * @param c
+     *            {@code null}-safe reference to a {@code Cursor}
+     */
+    public static void quietClose(Cursor c) {
+        if (c != null) {
+            c.close();
         }
     }
 

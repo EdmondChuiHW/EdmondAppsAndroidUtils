@@ -29,29 +29,29 @@ public final class Logs {
         throw new AssertionError("nice try");
     }
 
-    private static boolean shouldLog = false;
+    private static boolean sShouldLog = false;
 
     /**
      * 
-     * @param shouldLog
+     * @param sShouldLog
      *            disables all logging calls if false
      */
     public static void setShouldLog(boolean shouldLog) {
-        Logs.shouldLog = shouldLog;
+        Logs.sShouldLog = shouldLog;
     }
 
     /**
      * @see #setShouldLog(boolean)
      */
     public static boolean getShouldLog() {
-        return shouldLog;
+        return sShouldLog;
     }
 
     /**
      * @see android.util.Log#v(String, String)
      */
     public static void v(String tag, String msg) {
-        if (shouldLog) {
+        if (sShouldLog) {
             Log.d(tag, msg);
         }
     }
@@ -60,7 +60,7 @@ public final class Logs {
      * @see android.util.Log#v(String, String, Throwable)
      */
     public static void v(String tag, String msg, Throwable tr) {
-        if (shouldLog) {
+        if (sShouldLog) {
             Log.v(tag, msg, tr);
         }
     }
@@ -69,7 +69,7 @@ public final class Logs {
      * @see android.util.Log#d(String, String)
      */
     public static void d(String tag, String msg) {
-        if (shouldLog) {
+        if (sShouldLog) {
             Log.d(tag, msg);
         }
     }
@@ -78,7 +78,7 @@ public final class Logs {
      * @see android.util.Log#d(String, String, Throwable)
      */
     public static void d(String tag, String msg, Throwable tr) {
-        if (shouldLog) {
+        if (sShouldLog) {
             Log.d(tag, msg, tr);
         }
     }
@@ -87,7 +87,7 @@ public final class Logs {
      * @see android.util.Log#i(String, String)
      */
     public static void i(String tag, String msg) {
-        if (shouldLog) {
+        if (sShouldLog) {
             Log.i(tag, msg);
         }
     }
@@ -96,7 +96,7 @@ public final class Logs {
      * @see android.util.Log#i(String, String, Throwable)
      */
     public static void i(String tag, String msg, Throwable tr) {
-        if (shouldLog) {
+        if (sShouldLog) {
             Log.i(tag, msg, tr);
         }
     }
@@ -105,7 +105,7 @@ public final class Logs {
      * @see android.util.Log#w(String, String)
      */
     public static void w(String tag, String msg) {
-        if (shouldLog) {
+        if (sShouldLog) {
             Log.w(tag, msg);
         }
     }
@@ -114,7 +114,7 @@ public final class Logs {
      * @see android.util.Log#w(String, Throwable)
      */
     public static void w(String tag, Throwable tr) {
-        if (shouldLog) {
+        if (sShouldLog) {
             Log.w(tag, tr);
         }
     }
@@ -123,7 +123,7 @@ public final class Logs {
      * @see android.util.Log#w(String, String, Throwable)
      */
     public static void w(String tag, String msg, Throwable tr) {
-        if (shouldLog) {
+        if (sShouldLog) {
             Log.w(tag, msg, tr);
         }
     }
@@ -132,7 +132,7 @@ public final class Logs {
      * @see android.util.Log#e(String, String)
      */
     public static void e(String tag, String msg) {
-        if (shouldLog) {
+        if (sShouldLog) {
             Log.e(tag, msg);
         }
     }
@@ -141,7 +141,7 @@ public final class Logs {
      * @see android.util.Log#e(String, String, Throwable)
      */
     public static void e(String tag, String msg, Throwable tr) {
-        if (shouldLog) {
+        if (sShouldLog) {
             Log.e(tag, msg, tr);
         }
     }

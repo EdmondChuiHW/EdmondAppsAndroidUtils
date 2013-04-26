@@ -60,7 +60,7 @@ public abstract class DatabaseFilter extends Filter implements Closeable {
         return wrapCursor(results, mDatabase.query(selection.toString(), selectionArgs));
     }
 
-    private FilterResults wrapCursor(FilterResults r, Cursor c) {
+    private static FilterResults wrapCursor(FilterResults r, Cursor c) {
         r.count = c.getCount();
         r.values = c;
         return r;

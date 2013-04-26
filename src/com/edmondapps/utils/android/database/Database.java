@@ -361,6 +361,7 @@ public abstract class Database<T extends DatabaseEntry> extends SQLiteOpenHelper
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
+            db.close();
         }
         return ids;
     }
