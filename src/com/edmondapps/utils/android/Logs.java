@@ -145,4 +145,8 @@ public final class Logs {
             Log.e(tag, msg, tr);
         }
     }
+
+    public static void e(String tag, Throwable tr) {
+        e(tag, tr.getMessage(), tr);
+    }
 }

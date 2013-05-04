@@ -22,6 +22,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
+import com.edmondapps.utils.android.view.ViewUtils;
+
 public final class Utils {
     private static final boolean HAS_JELLY_BEAN_MR1 = VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR1;
     private static final boolean HAS_JELLY_BEAN = HAS_JELLY_BEAN_MR1 ? true : VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN;
@@ -146,9 +148,11 @@ public final class Utils {
      * 
      * @throws ClassCastException
      *             if the view is not of type V.
+     * @deprecated Use {@link ViewUtils#findView(Activity, int)}
      */
     // let it crash run-time!
     @SuppressWarnings("unchecked")
+    @Deprecated
     public static <V extends View> V findView(Activity activity, int id) {
         return (V)activity.findViewById(id);
     }
@@ -159,9 +163,11 @@ public final class Utils {
      * 
      * @throws ClassCastException
      *             if the view is not of type V.
+     * @deprecated Use {@link ViewUtils#findView(View, int)}
      */
     // let it crash run-time!
     @SuppressWarnings("unchecked")
+    @Deprecated
     public static <V extends View> V findView(View parent, int id) {
         return (V)parent.findViewById(id);
     }
