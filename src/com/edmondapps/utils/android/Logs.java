@@ -147,6 +147,7 @@ public final class Logs {
     }
 
     public static void e(String tag, Throwable tr) {
-        e(tag, tr.getMessage(), tr);
+        String message = tr.getMessage();
+        e(tag, message == null ? tr.toString() : message, tr);
     }
 }
