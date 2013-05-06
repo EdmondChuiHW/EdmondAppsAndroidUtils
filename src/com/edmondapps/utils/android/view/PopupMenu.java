@@ -20,12 +20,13 @@ import android.content.Context;
 import android.view.View;
 
 import com.actionbarsherlock.internal.view.menu.MenuBuilder;
-import com.actionbarsherlock.internal.view.menu.MenuPopupHelper;
+import com.actionbarsherlock.internal.view.menu.MenuPopupHelper2;
 import com.actionbarsherlock.internal.view.menu.MenuPresenter;
 import com.actionbarsherlock.internal.view.menu.SubMenuBuilder;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+
 // Thank you ActionBarSherlock
 
 /**
@@ -41,7 +42,7 @@ public class PopupMenu implements MenuBuilder.Callback, MenuPresenter.Callback {
     private final Context mContext;
     private final MenuBuilder mMenu;
     private final View mAnchor;
-    private final MenuPopupHelper mPopup;
+    private final MenuPopupHelper2 mPopup;
     private OnMenuItemClickListener mMenuItemClickListener;
     private OnDismissListener mDismissListener;
 
@@ -74,7 +75,7 @@ public class PopupMenu implements MenuBuilder.Callback, MenuPresenter.Callback {
         mMenu = new MenuBuilder(context);
         mMenu.setCallback(this);
         mAnchor = anchor;
-        mPopup = new MenuPopupHelper(context, mMenu, anchor);
+        mPopup = new MenuPopupHelper2(context, mMenu, anchor);
         mPopup.setCallback(this);
     }
 
@@ -188,7 +189,7 @@ public class PopupMenu implements MenuBuilder.Callback, MenuPresenter.Callback {
 
         // Current menu will be dismissed by the normal helper, submenu will be
         // shown in its place.
-        new MenuPopupHelper(mContext, subMenu, mAnchor).show();
+        new MenuPopupHelper2(mContext, subMenu, mAnchor).show();
         return true;
     }
 

@@ -42,13 +42,10 @@ import com.edmondapps.utils.android.R;
 
 /**
  * Presents a menu as a small, simple popup anchored to another view.
- * </p>
- * Edmond: Patched a few area where anchor is casted to
- * View_HasStateListenerSupport without instanceof checks.
  * 
  * @hide
  */
-public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.OnKeyListener,
+public class MenuPopupHelper2 implements AdapterView.OnItemClickListener, View.OnKeyListener,
         ViewTreeObserver.OnGlobalLayoutListener, PopupWindow.OnDismissListener,
         View_OnAttachStateChangeListener, MenuPresenter {
     // UNUSED private static final String TAG = "MenuPopupHelper";
@@ -72,15 +69,15 @@ public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.On
 
     private ViewGroup mMeasureParent;
 
-    public MenuPopupHelper(Context context, MenuBuilder menu) {
+    public MenuPopupHelper2(Context context, MenuBuilder menu) {
         this(context, menu, null, false);
     }
 
-    public MenuPopupHelper(Context context, MenuBuilder menu, View anchorView) {
+    public MenuPopupHelper2(Context context, MenuBuilder menu, View anchorView) {
         this(context, menu, anchorView, false);
     }
 
-    public MenuPopupHelper(Context context, MenuBuilder menu,
+    public MenuPopupHelper2(Context context, MenuBuilder menu,
             View anchorView, boolean overflowOnly) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
