@@ -29,20 +29,15 @@ import android.widget.ProgressBar;
  * Use {@link LoadingViews#of(View, ProgressBar)} to obtain an instance.
  * 
  * @author Edmond
- * 
- * @param <V>
- *            the main content view
- * @param <P>
- *            the progress view
  */
-public class LoadingViews<V extends View, P extends View> {
+public class LoadingViews {
     /**
      * Default duration of all animations.
      */
     public static final long DEFAULT_DURATION = 300L;
 
-    private final V mView;
-    private final P mProgressBar;
+    private final View mView;
+    private final View mProgressBar;
     private final long mDuration;
     private final RunnableAnimatorListener mListener = new RunnableAnimatorListener(true);
     private final Runnable mViewEndAction = new Runnable() {
@@ -79,18 +74,18 @@ public class LoadingViews<V extends View, P extends View> {
      * @param view
      *            the reference to the main content {@code View}.
      * @param p
-     *            the reference to the {@code ProgressBar} (usually
-     *            indeterminate)
+     *            the reference to the {@code View} (usually
+     *            an indeterminate {@code ProgressBar})
      * @return
      */
-    public static final <V extends View> LoadingViews<V, ProgressBar> of(V view, ProgressBar p) {
-        return new LoadingViews<V, ProgressBar>(view, p, DEFAULT_DURATION);
+    public static final LoadingViews of(View view, View p) {
+        return new LoadingViews(view, p, DEFAULT_DURATION);
     }
 
     /**
      * Constructs a {@link LoadingViews} with custom parameters.
      */
-    public LoadingViews(V view, P progressBar, long duration) {
+    public LoadingViews(View view, View progressBar, long duration) {
         mView = view;
         mProgressBar = progressBar;
         mDuration = duration;
@@ -129,7 +124,7 @@ public class LoadingViews<V extends View, P extends View> {
      * 
      * @return the same {@code View} passed to the constructor
      */
-    public final V getView() {
+    public final View getView() {
         return mView;
     }
 
@@ -139,7 +134,7 @@ public class LoadingViews<V extends View, P extends View> {
      *         {@link ProgressBar} if you used the
      *         {@link LoadingViews#of(View, ProgressBar)} factory method.
      */
-    public final P getProgressBar() {
+    public final View getProgressBar() {
         return mProgressBar;
     }
 

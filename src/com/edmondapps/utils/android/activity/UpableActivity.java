@@ -15,7 +15,6 @@
  */
 package com.edmondapps.utils.android.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -31,6 +30,10 @@ import com.edmondapps.utils.android.annotaion.ParentActivity;
  * {@code Activity} with the correct {@code Intent} flags, and calls
  * {@link #finish()} on the current {@code Activity}.
  * <p>
+ * Alternatively, you can pass in the parent {@code Activity} class as a
+ * {@code Serializable} extra with the key {@link #KEY_PARENT_ACTIVITY}. This
+ * will take precedence over the annotation.
+ * <p>
  * You may adjust these behaviours using {@link #onUpPressed()} and
  * {@link #getUpIntent(Class)}.
  * 
@@ -38,14 +41,29 @@ import com.edmondapps.utils.android.annotaion.ParentActivity;
  * 
  */
 public abstract class UpableActivity extends SherlockFragmentActivity {
+    /**
+     * The key for passing a parent Activity with {@code Intent}.
+     * 
+     * @see Intent#putExtra(String, java.io.Serializable)
+     * @see Bundle#putSerializable(String, java.io.Serializable)
+     */
+    public static final String KEY_PARENT_ACTIVITY = "ed__parent_activity";
 
-    private ParentActivity mUpAnnotaion;
+    private Class<?> mParentActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUpAnnotaion = getClass().getAnnotation(ParentActivity.class);
-        if (mUpAnnotaion != null) {
+
+        mParentActivity = (Class<?>)getIntent().getSerializableExtra(KEY_PARENT_ACTIVITY);
+        if (mParentActivity == null) {
+            ParentActivity upAnnotaion = getClass().getAnnotation(ParentActivity.class);
+            if (upAnnotaion != null) {
+                mParentActivity = upAnnotaion.value();
+            }
+        }
+
+        if (mParentActivity != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -55,8 +73,8 @@ public abstract class UpableActivity extends SherlockFragmentActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 if (!onUpPressed()) {
-                    if (mUpAnnotaion != null) {
-                        startActivity(getUpIntent(mUpAnnotaion.value()));
+                    if (mParentActivity != null) {
+                        startActivity(getUpIntent(mParentActivity));
                         finish();
                         return true;
                     }
@@ -85,11 +103,15 @@ public abstract class UpableActivity extends SherlockFragmentActivity {
      *         a non-null {@code Activity} {@link Intent} which will be passed
      *         to {@link #startActivity(Intent)}.
      */
-    protected Intent getUpIntent(Class<? extends Activity> activity) {
+    protected Intent getUpIntent(Class<?> activity) {
         Intent intent = new Intent(this, activity);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_SINGLE_TOP |
                 Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
+    }
+
+    protected Class<?> getUpActivity() {
+        return mParentActivity;
     }
 }

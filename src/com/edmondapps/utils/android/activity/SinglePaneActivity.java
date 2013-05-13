@@ -94,7 +94,7 @@ public abstract class SinglePaneActivity extends UpableActivity {
     /**
      * Called during every time {@link #onCreate(Bundle)} is invoked, clients
      * may override this method if a custom layout is supplied. If you do
-     * supply a custom layout, you must also override
+     * supply a custom layout, you should also override
      * {@link #onCreateFragmentLayoutId()} or an
      * error may occur.
      * 
@@ -123,8 +123,9 @@ public abstract class SinglePaneActivity extends UpableActivity {
     /**
      * Called during {@link #onCreate(Bundle)} if necessary.
      * 
-     * Clients must override this method if a custom layout is supplied by
-     * {@link #onCreateLayoutId()}.
+     * Unless your custom layout uses {@code R.id.ed__frame_main} for the
+     * {@code Fragment}, Clients should override this method if a custom layout
+     * is supplied by {@link #onCreateLayoutId()} .
      * 
      * @return an {@code id} for the {@code Fragment} to be placed in
      */

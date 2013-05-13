@@ -16,6 +16,7 @@
 package com.edmondapps.utils.android.ui;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import android.database.DataSetObserver;
@@ -81,6 +82,10 @@ public Object getItem(int position) {
          */
         public BaseAdapter getAdapter() {
             return mAdapter;
+        }
+
+        private boolean isEmpty() {
+            return getAdapter().isEmpty();
         }
 
         private int getCount() {
@@ -199,8 +204,31 @@ public Object getItem(int position) {
     }
 
     /**
-     * Append an adapter to the end of this {@code CompoundAdapter}.
      * 
+     * @param position
+     *            the position of the {@code CompoundAdapter}
+     * @param info
+     *            usually retrieved by {@link #getAdapterInfo(int)}
+     * @return the view type of the adapter contained in the {@code AdapterInfo}
+     */
+    public final static int getViewTypeForAdapter(int position, AdapterInfo info) {
+        int pos = getPositionForAdapter(position, info);
+        return info.getAdapter().getItemViewType(pos) + info.getViewTypeOffset();
+    }
+
+    /**
+     * a shorthand for
+     * {@code getViewTypeForAdapter(position, getAdapterInfo(position))}
+     */
+    public final int getViewTypeForAdapter(int position) {
+        return getViewTypeForAdapter(position, getAdapterInfo(position));
+    }
+
+    /**
+     * Append an adapter to the end of this {@code CompoundAdapter}.<br>
+     * This {@code CompoundAdapter} will also refresh itself.
+     * 
+     * @see #notifyDataSetChanged()
      * @param adapter
      *            a non-null instance of a {@code BaseAdapter}
      */
@@ -209,16 +237,42 @@ public Object getItem(int position) {
         notifyDataSetChanged();
     }
 
+    /**
+     * Performs a linear search of the adapters in this {@code CompoundAdapter}
+     * to remove the provided adapter. If it does remove the adapter, this
+     * adapter will refresh itself.
+     * 
+     * @see #notifyDataSetChanged()
+     * @param adapter
+     *            an instance of {@code BaseAdapter}
+     * @return if it has removed the provided adapter
+     */
+    public boolean removeAdapter(BaseAdapter adapter) {
+        Iterator<AdapterInfo> it = mAdapters.iterator();
+        while (it.hasNext()) {
+            AdapterInfo info = it.next();
+            // identity check
+            if (info.getAdapter() == adapter) {
+                it.remove();
+                notifyDataSetChanged();
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void updateOffset() {
         int count = 0;
         int viewTypeCount = 0;
 
-        for (AdapterInfo adapterInfo : mAdapters) {
-            adapterInfo.setPosition(count);
-            adapterInfo.setViewTypeOffset(viewTypeCount);
+        for (AdapterInfo info : mAdapters) {
+            info.setPosition(count);
+            info.setViewTypeOffset(viewTypeCount);
 
-            count += adapterInfo.getCount();
-            viewTypeCount += adapterInfo.getViewTypeCount();
+            if (!info.isEmpty()) {
+                count += info.getCount();
+            }
+            viewTypeCount += info.getViewTypeCount();
         }
     }
 
@@ -307,9 +361,7 @@ public Object getItem(int position) {
 
     @Override
     public int getItemViewType(int position) {
-        AdapterInfo info = getAdapterInfo(position);
-        int pos = getPositionForAdapter(position, info);
-        return info.getAdapter().getItemViewType(pos) + info.getViewTypeOffset();
+        return getViewTypeForAdapter(position);
     }
 
     @Override
@@ -339,7 +391,9 @@ public Object getItem(int position) {
     private int getCountInternal() {
         int count = 0;
         for (AdapterInfo info : mAdapters) {
-            count += info.getCount();
+            if (!info.isEmpty()) {
+                count += info.getCount();
+            }
         }
         return count;
     }
@@ -360,6 +414,7 @@ public Object getItem(int position) {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         AdapterInfo info = getAdapterInfo(position);
-        return info.getAdapter().getView(getPositionForAdapter(position, info), convertView, parent);
+        int pos = getPositionForAdapter(position, info);
+        return info.getAdapter().getView(pos, convertView, parent);
     }
 }

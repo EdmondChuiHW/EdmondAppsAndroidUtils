@@ -49,4 +49,8 @@ public class SingleAdapter<V extends View> extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         return mView;
     }
+
+    public View getView() {
+        return mView;
+    }
 }

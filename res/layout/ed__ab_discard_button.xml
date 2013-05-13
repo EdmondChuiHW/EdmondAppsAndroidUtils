@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ed__ab_discard"
+    style="?attr/actionButtonStyle"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="?attr/selectableItemBackground"
+    android:paddingRight="20dp" >
+
+    <TextView
+        style="@style/Widget.Sherlock.ActionBar.TabText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableLeft="@drawable/ic_action_discard"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:text="@string/discard" >
+    </TextView>
+
+</FrameLayout>

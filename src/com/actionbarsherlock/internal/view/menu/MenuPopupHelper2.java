@@ -48,7 +48,7 @@ import com.edmondapps.utils.android.R;
 public class MenuPopupHelper2 implements AdapterView.OnItemClickListener, View.OnKeyListener,
         ViewTreeObserver.OnGlobalLayoutListener, PopupWindow.OnDismissListener,
         View_OnAttachStateChangeListener, MenuPresenter {
-    // UNUSED private static final String TAG = "MenuPopupHelper";
+    // UNUSED private static final String TAG = "MenuPopupHelper2";
 
     static final int ITEM_LAYOUT = R.layout.abs__popup_menu_item_layout;
 
@@ -103,7 +103,7 @@ public class MenuPopupHelper2 implements AdapterView.OnItemClickListener, View.O
 
     public void show() {
         if (!tryShow()) {
-            throw new IllegalStateException("MenuPopupHelper cannot be used without an anchor");
+            throw new IllegalStateException("MenuPopupHelper2 cannot be used without an anchor");
         }
     }
 
@@ -144,8 +144,8 @@ public class MenuPopupHelper2 implements AdapterView.OnItemClickListener, View.O
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
+    @SuppressWarnings("deprecation")
     public void onDismiss() {
         mPopup = null;
         mMenu.close();
@@ -223,8 +223,8 @@ public class MenuPopupHelper2 implements AdapterView.OnItemClickListener, View.O
     public void onViewAttachedToWindow(View v) {
     }
 
-    @SuppressWarnings("deprecation")
     @Override
+    @SuppressWarnings("deprecation")
     public void onViewDetachedFromWindow(View v) {
         if (mTreeObserver != null) {
             if (!mTreeObserver.isAlive()) {
@@ -263,7 +263,7 @@ public class MenuPopupHelper2 implements AdapterView.OnItemClickListener, View.O
     @Override
     public boolean onSubMenuSelected(SubMenuBuilder subMenu) {
         if (subMenu.hasVisibleItems()) {
-            MenuPopupHelper subPopup = new MenuPopupHelper(mContext, subMenu, mAnchorView, false);
+            MenuPopupHelper2 subPopup = new MenuPopupHelper2(mContext, subMenu, mAnchorView, false);
             subPopup.setCallback(mPresenterCallback);
 
             boolean preserveIconSpacing = false;
