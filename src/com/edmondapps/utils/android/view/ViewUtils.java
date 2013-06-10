@@ -44,7 +44,8 @@ public final class ViewUtils {
     /**
      * Determines if a {@link TextView} contains empty text.
      * </br>
-     * If it is empty, the {@code TextView} will display a error message.
+     * If it is empty, the {@code TextView} will display a error message, and
+     * requests focus.
      * 
      * @see TextUtils#isEmpty(CharSequence)
      * @param errorString
@@ -56,20 +57,22 @@ public final class ViewUtils {
         boolean isEmpty = TextUtils.isEmpty(e.getText().toString());
         if (isEmpty) {
             e.setError(e.getContext().getText(errorString));
+            e.requestFocus();
         }
         return isEmpty;
     }
 
     /**
-     * Determines if a {@link TextView} contains empty text.
+     * Determines if multiple {@link TextView}s contain empty text.
      * </br>
-     * If it is empty, the {@code TextView} will display a error message.
+     * If any one is empty, the {@code TextView} will display a error message,
+     * and requests focus.
      * 
      * @see TextUtils#isEmpty(CharSequence)
      * @param errorString
      *            the resource id of {@code R.string.*}
-     * @param e
-     *            non-null instance of an {@code TextView}
+     * @param views
+     *            non-null instances of a {@code TextView}
      */
     public static boolean isAllTextNotEmpty(int errorString, TextView... views) {
         for (TextView v : views) {
