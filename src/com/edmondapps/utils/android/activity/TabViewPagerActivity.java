@@ -37,11 +37,13 @@ import com.edmondapps.utils.android.actionbar.SimpleTabListener;
  * @author Edmond
  * 
  */
-public abstract class TabViewPagerActivity extends UpableActivity {
+public abstract class TabViewPagerActivity extends UpableActivity implements ViewPagerCreator {
     private static final String KEY_VIEW_PAGER_POS = "ed__view_pager_pos";
     private static final String KEY_TAB_POS = "ed__tab_pos";
+    private static final String KEY_TABS_ENABLED = "ed__tabs_enabled";
 
     private ViewPager mViewPager;
+    private boolean mTabsEnabled;
     private PagerAdapter mPagerAdapter;
     private TabListener mTabListener;
     private OnPageChangeListener mOnPageChangeListener;
@@ -52,15 +54,24 @@ public abstract class TabViewPagerActivity extends UpableActivity {
 
         setContentView(R.layout.ed__layout_view_pager);
 
+        mTabsEnabled = isTabsEnabled();
+
         mPagerAdapter = onCreatePagerAdapter();
-        mTabListener = onCreateTabListener();
         mOnPageChangeListener = onCreateOnPageChangeListener();
 
         mViewPager = (ViewPager)findViewById(R.id.view_pager);
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setOnPageChangeListener(mOnPageChangeListener);
 
-        initTabs();
+        if (mTabsEnabled) {
+            mTabListener = onCreateTabListener();
+            initTabs();
+        }
+    }
+
+    @Override
+    public boolean isTabsEnabled() {
+        return true;
     }
 
     /**
@@ -95,6 +106,7 @@ public abstract class TabViewPagerActivity extends UpableActivity {
 
         outState.putInt(KEY_TAB_POS, getSupportActionBar().getSelectedNavigationIndex());
         outState.putInt(KEY_VIEW_PAGER_POS, mViewPager.getCurrentItem());
+        outState.putBoolean(KEY_TABS_ENABLED, mTabsEnabled);
     }
 
     /**
@@ -104,38 +116,23 @@ public abstract class TabViewPagerActivity extends UpableActivity {
     protected void onRestoreInstanceState(Bundle savedState) {
         super.onRestoreInstanceState(savedState);
 
-        if (savedState.containsKey(KEY_TAB_POS) && savedState.containsKey(KEY_VIEW_PAGER_POS)) {
-            getSupportActionBar().setSelectedNavigationItem(savedState.getInt(KEY_TAB_POS));
+        if (savedState.containsKey(KEY_TAB_POS)
+                && savedState.containsKey(KEY_VIEW_PAGER_POS)
+                && savedState.containsKey(KEY_TABS_ENABLED)) {
+
+            mTabsEnabled = savedState.getBoolean(KEY_TABS_ENABLED);
             mViewPager.setCurrentItem(savedState.getInt(KEY_VIEW_PAGER_POS), true);
+            if (mTabsEnabled) {
+                getSupportActionBar().setSelectedNavigationItem(savedState.getInt(KEY_TAB_POS));
+            }
+
         } else {
             throw new IllegalStateException("invalid Bundle, did you call super.onSaveInstanceState(Bundle)?");
         }
     }
 
-    /**
-     * Called once during {@link #onCreate(Bundle)}, the returned
-     * {@code PagerAdapter} is stored.
-     * 
-     * @see #getPagerAdapter()
-     * 
-     * @return a non-null {@code PagerAdapter}, it must also implement
-     *         {@link PagerAdapter#getPageTitle(int)}
-     */
-    protected abstract PagerAdapter onCreatePagerAdapter();
-
-    /**
-     * Called once during {@link #onCreate(Bundle)}, the returned
-     * {@code TabListener} is stored. <br />
-     * <br />
-     * The default implementation calls
-     * {@link ViewPager#setCurrentItem(int, boolean)} when
-     * {@link TabListener#onTabSelected} is invoked.
-     * 
-     * @see #getTabListener()
-     * 
-     * @return a non-null {@code TabListener}
-     */
-    protected TabListener onCreateTabListener() {
+    @Override
+    public TabListener onCreateTabListener() {
         return new SimpleTabListener() {
             @Override
             public void onTabSelected(Tab tab, FragmentTransaction ft) {
@@ -144,59 +141,35 @@ public abstract class TabViewPagerActivity extends UpableActivity {
         };
     }
 
-    /**
-     * Called once during {@link #onCreate(Bundle)}, the returned
-     * {@code TabListener} is stored.<br />
-     * <br />
-     * The default implementation calls
-     * {@link ActionBar#setSelectedNavigationItem(int)} when
-     * {@link OnPageChangeListener#onPageSelected(int)} is invoked.
-     * 
-     * @see #getOnPageChangeListener()
-     * 
-     * @return an instance of {@code OnPageChangeListener} or {@code null}
-     */
-    protected OnPageChangeListener onCreateOnPageChangeListener() {
+    @Override
+    public OnPageChangeListener onCreateOnPageChangeListener() {
         return new SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                getSupportActionBar().setSelectedNavigationItem(position);
+                if (mTabsEnabled) {
+                    getSupportActionBar().setSelectedNavigationItem(position);
+                }
             }
         };
     }
 
-    /**
-     * 
-     * @return the stored {@code PagerAdapter} returned by
-     *         {@link #onCreatePagerAdapter()}
-     */
-    protected PagerAdapter getPagerAdapter() {
+    @Override
+    public PagerAdapter getPagerAdapter() {
         return mPagerAdapter;
     }
 
-    /**
-     * 
-     * @return the local {@code ViewPager} instance
-     */
-    protected ViewPager getViewPager() {
+    @Override
+    public ViewPager getViewPager() {
         return mViewPager;
     }
 
-    /**
-     * 
-     * @return the stored {@code TabListener} returned by
-     *         {@link #onCreateTabListener()}
-     */
-    protected TabListener getTabListener() {
+    @Override
+    public TabListener getTabListener() {
         return mTabListener;
     }
 
-    /**
-     * 
-     * @return the stored {@code OnPageChangeListener} returned by
-     *         {@link #onCreateOnPageChangeListener()}
-     */
-    protected OnPageChangeListener getOnPageChangeListener() {
+    @Override
+    public OnPageChangeListener getOnPageChangeListener() {
         return mOnPageChangeListener;
     }
 }
