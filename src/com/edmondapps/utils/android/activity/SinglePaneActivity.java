@@ -69,6 +69,9 @@ public abstract class SinglePaneActivity extends UpableActivity {
         if (savedState == null) {
             mFragmentLayoutId = onCreateFragmentLayoutId();
             mFragment = onCreateFragment();
+            if (mFragment == null) {
+                return;
+            }
             mFragmentTag = onCreateFragmentTag();
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
