@@ -18,17 +18,60 @@ package com.edmondapps.utils.java;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import com.edmondapps.utils.java.IoUtils.ProgressCallback;
 
 /**
  * @author Edmond
  * 
  */
 public class IoTest {
+    @Test
+    public void fileCopy() {
+        final String expected = generateCrazyString();
+        InputStream inputStream = null;
+        ByteArrayOutputStream outputStream = null;
+        try {
+            inputStream = new BufferedInputStream(new ByteArrayInputStream(expected.getBytes()));
+            outputStream = new ByteArrayOutputStream();
+            IoUtils.inputToOutput(inputStream, outputStream, new ProgressCallback() {
+                @Override
+                public boolean onProgress(long progress) {
+                    System.out.println(progress);
+                    return true;
+                }
+            });
+
+            outputStream.flush();
+            String actual = outputStream.toString();
+            Assert.assertEquals(expected, actual);
+        } catch (IOException e) {
+            Assert.fail();
+        } finally {
+            IoUtils.quietClose(outputStream);
+            IoUtils.quietClose(inputStream);
+        }
+    }
+
+    private static String generateCrazyString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < 1337; ++i) {
+            builder.append("string");
+            builder.append(i);
+        }
+        return builder.toString();
+    }
+
     @Test
     public void validUrl() {
         URL url = IoUtils.newURL("http://www.google.com");

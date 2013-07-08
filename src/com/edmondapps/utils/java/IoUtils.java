@@ -18,7 +18,9 @@ package com.edmondapps.utils.java;
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -139,6 +141,49 @@ public final class IoUtils {
     public static void quietDisconnet(HttpURLConnection c) {
         if (c != null) {
             c.disconnect();
+        }
+    }
+
+    public interface ProgressCallback {
+        /**
+         * Called when a progress is made.
+         * 
+         * @param progress
+         *            as per {@link InputStream#read(byte[])}
+         * @return true if the operation should continue, false to abort and
+         *         return immediately
+         */
+        boolean onProgress(long progress);
+    }
+
+    public static void inputToOutput(InputStream source, OutputStream target) throws IOException {
+        inputToOutput(source, target, null);
+    }
+
+    /**
+     * Reads from an {@link InputStream} and writes its content to the
+     * {@link OutputStream}. </br>
+     * The target {@link OutputStream} is <b>not</b> flushed. </br>
+     * Both the source or the target will not be closed.
+     * 
+     * @param source
+     *            the source {@link InputStream}
+     * @param target
+     *            the target {@link OutputStream}
+     * @param callback
+     *            the callback for progress updates
+     */
+    public static void inputToOutput(InputStream source, OutputStream target, ProgressCallback callback) throws IOException {
+        byte[] buffer = new byte[1024];
+        long progress = 0;
+        for (int read = 0; (read = source.read(buffer)) != -1;) {
+            target.write(buffer, 0, read);
+            progress += read;
+            if (callback != null) {
+                if (!callback.onProgress(progress)) {
+                    return;
+                }
+            }
         }
     }
 }

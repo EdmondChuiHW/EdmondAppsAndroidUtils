@@ -18,6 +18,7 @@ package com.edmondapps.utils.android.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.edmondapps.utils.android.annotaion.ParentActivity;
@@ -64,7 +65,10 @@ public abstract class UpableActivity extends SherlockFragmentActivity {
         }
 
         if (mParentActivity != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
         }
     }
 
