@@ -15,25 +15,17 @@
  */
 package com.edmondapps.utils.android.service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URLConnection;
-
 import android.os.AsyncTask;
-
 import com.edmondapps.utils.android.Logs;
 import com.edmondapps.utils.java.IoUtils;
 import com.edmondapps.utils.java.IoUtils.ProgressCallback;
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URLConnection;
+
 /**
  * @author Edmond
- * 
  */
 public abstract class FileUploadService {
     public static final String TAG = "FileUploadService";
@@ -48,25 +40,24 @@ public abstract class FileUploadService {
     public interface Callback {
         /**
          * Called when progress is made.
+         *
+         * @return if the operation should continue (false to terminate)
          */
-        void onProgress(long progress, long total);
+        boolean onProgress(long progress, long total);
 
         /**
          * Called when the task is finished or canceled.
-         * 
-         * @param success
-         *            if the operation was finished successfully
+         *
+         * @param success if the operation was finished successfully
          */
         void onDone(boolean success);
     }
 
     /**
      * Uploads a {@link File} synchronously.
-     * 
-     * @param file
-     *            the file to be uploaded
-     * @param where
-     *            the destination url
+     *
+     * @param file  the file to be uploaded
+     * @param where the destination url
      * @return if the upload was successful
      */
     public static boolean uploadFile(File file, String where) {
@@ -75,19 +66,16 @@ public abstract class FileUploadService {
 
     /**
      * Uploads a {@link File} asynchronously.
-     * 
-     * @param file
-     *            the file to be uploaded
-     * @param where
-     *            the destination url
-     * @param callback
-     *            the callback (invoked in the same thread as the one calling
-     *            this method)
+     *
+     * @param file     the file to be uploaded
+     * @param where    the destination url
+     * @param callback the callback (invoked in the same thread as the one calling
+     *                 this method)
      * @return an {@link AsyncTask} reference, you may cancel the task with this
      *         reference
      */
     public static AsyncTask<?, ?, ?> uploadFileAsync(File file, String where, Callback callback) {
-        return new FileUploadTask(file, where, callback).execute((Void[])null);
+        return new FileUploadTask(file, where, callback).execute((Void[]) null);
     }
 
     /*
@@ -95,7 +83,6 @@ public abstract class FileUploadService {
      * http://stackoverflow.com/questions/2793150/how-to-use-java-net-urlconnection
      * -to-fire-and-handle-http-requests/2793153#2793153
      */
-    @SuppressWarnings("resource")
     private static boolean uploadFile(File file, String where, ProgressCallback callback) {
         HttpURLConnection conn = null;
         InputStream inputStream = null;
@@ -118,9 +105,10 @@ public abstract class FileUploadService {
             writer = new PrintWriter(outputStream, true);
 
             // start of binary boundary.
-            writer.append("--" + boundary).append(CRLF);
-            writer.append("Content-Disposition: form-data; name=\"" + HEADER_NAME + "\"; filename=\"" + file.getName() + "\"").append(CRLF);
-            writer.append("Content-Type: " + URLConnection.guessContentTypeFromName(file.getName())).append(CRLF);
+            writer.append("--").append(boundary).append(CRLF);
+            writer.append("Content-Disposition: form-data; name=\"").append(HEADER_NAME)
+                    .append("\"; filename=\"").append(file.getName()).append("\"").append(CRLF);
+            writer.append("Content-Type: ").append(URLConnection.guessContentTypeFromName(file.getName())).append(CRLF);
             writer.append("Content-Transfer-Encoding: binary").append(CRLF);
             writer.append(CRLF).flush();
 
@@ -131,7 +119,7 @@ public abstract class FileUploadService {
             writer.append(CRLF).flush();
 
             // End of multipart/form-data.
-            writer.append("--" + boundary + "--").append(CRLF);
+            writer.append("--").append(boundary).append("--").append(CRLF);
             writer.flush();
 
             return conn.getResponseCode() == HttpURLConnection.HTTP_OK;
@@ -174,19 +162,27 @@ public abstract class FileUploadService {
         @Override
         protected void onProgressUpdate(Long... values) {
             super.onProgressUpdate(values);
-            mCallback.onProgress(values[0], values[1]);
+            if (mCallback != null && !isCancelled()) {
+                if (!mCallback.onProgress(values[0], values[1])) {
+                    cancel(false);
+                }
+            }
         }
 
         @Override
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
-            mCallback.onDone(result);
+            if (mCallback != null) {
+                mCallback.onDone(result);
+            }
         }
 
         @Override
         protected void onCancelled() {
             super.onCancelled();
-            mCallback.onDone(false);
+            if (mCallback != null) {
+                mCallback.onDone(false);
+            }
         }
     }
 }
