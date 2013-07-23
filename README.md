@@ -7,7 +7,7 @@ All commits to the master branch include Javadoc.
 This lirary is under active development so the API is not frozen yet.  
 Detailed documentation will indicate any binary-incompatiable changes in future commits.  
 
-I am student, so please tell me if you have any suggetions/comments on my code.  
+Please let me know if you have any suggetions/comments on my code.  
 
 Samples
 ======================
