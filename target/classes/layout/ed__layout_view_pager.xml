@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
    Copyright 2013 Edmond Chui
 
@@ -11,20 +12,10 @@
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
-   limitations under the License.  
-
+   limitations under the License. 
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.edmondapps.utils.android"
-    android:versionCode="1"
-    android:versionName="1.0" >
 
-    <uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="17" />
-
-    <application
-        android:allowBackup="true" >
-    </application>
-
-</manifest>
+<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/view_pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />

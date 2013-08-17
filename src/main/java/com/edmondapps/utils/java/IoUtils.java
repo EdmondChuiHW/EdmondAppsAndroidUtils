@@ -107,8 +107,7 @@ public final class IoUtils {
         if (c != null) {
             try {
                 c.close();
-            } catch (IOException e) {
-                // intended to ignore
+            } catch (IOException ignored) {
             }
         }
     }
