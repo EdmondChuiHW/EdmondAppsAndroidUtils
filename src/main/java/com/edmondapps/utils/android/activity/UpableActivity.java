@@ -17,10 +17,9 @@ package com.edmondapps.utils.android.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import com.edmondapps.utils.android.annotaion.ParentActivity;
 
 /**
@@ -41,7 +40,7 @@ import com.edmondapps.utils.android.annotaion.ParentActivity;
  * @author Edmond
  * 
  */
-public abstract class UpableActivity extends SherlockFragmentActivity {
+public abstract class UpableActivity extends ActionBarActivity {
     /**
      * The key for passing a parent Activity with {@code Intent}.
      * 

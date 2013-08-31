@@ -9,7 +9,7 @@
     android:paddingRight="20dp" >
 
     <TextView
-        style="@style/Widget.Sherlock.ActionBar.TabText"
+        style="@style/Widget.AppCompat.ActionBar.TabText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

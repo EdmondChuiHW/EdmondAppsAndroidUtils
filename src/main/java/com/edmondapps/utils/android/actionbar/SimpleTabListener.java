@@ -17,14 +17,15 @@ package com.edmondapps.utils.android.actionbar;
 
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
+import android.support.v7.app.ActionBar;
 
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.ActionBar.TabListener;
+import static android.support.v7.app.ActionBar.Tab;
+import static android.support.v7.app.ActionBar.TabListener;
 
 /**
  * Skeleton class which implements {@link TabListener}. Extend this if you do
  * not intend to override every method of {@link TabListener}.
- * 
+ *
  * @author Edmond
  * @see SimpleOnPageChangeListener
  */

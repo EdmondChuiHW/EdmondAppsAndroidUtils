@@ -15,14 +15,13 @@
  */
 package com.edmondapps.utils.android.activity;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.LayoutParams;
 import com.edmondapps.utils.android.R;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 /**
  * Uses a custom {@code ActionBar} view for done/discard buttons. <br>
@@ -63,7 +62,7 @@ public abstract class DoneDiscardActivity extends SinglePaneActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setCustomView(view, new LayoutParams(MATCH_PARENT, MATCH_PARENT));
+        actionBar.setCustomView(view, new ActionBar.LayoutParams(MATCH_PARENT, MATCH_PARENT));
     }
 
     /**

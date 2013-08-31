@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import android.support.v7.app.ActionBarActivity;
 import com.edmondapps.utils.android.R;
 
 /**
@@ -25,7 +25,7 @@ import com.edmondapps.utils.android.R;
  * @author Edmond
  * 
  */
-public abstract class ForwardActivity extends SherlockActivity {
+public abstract class ForwardActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

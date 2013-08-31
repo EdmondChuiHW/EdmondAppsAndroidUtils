@@ -15,14 +15,15 @@
  */
 package com.edmondapps.utils.android.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.app.ActionBar;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.ActionBar.TabListener;
+import static android.support.v7.app.ActionBar.Tab;
+import static android.support.v7.app.ActionBar.TabListener;
 
 /**
  * @author Edmond
@@ -31,14 +32,14 @@ import com.actionbarsherlock.app.ActionBar.TabListener;
 public interface ViewPagerCreator {
 
     /**
-     * Called once during {@link #onCreate(Bundle)} when necessary.
+     * Called once during {@link Activity#onCreate(Bundle)} when necessary.
      * 
      * @return true if {@linkplain Tab}s should be used in the {@link ActionBar}
      */
     public abstract boolean isTabsEnabled();
 
     /**
-     * Called once during {@link #onCreate(Bundle)}, the returned
+     * Called once during {@link Activity#onCreate(Bundle)}, the returned
      * {@code PagerAdapter} is stored.
      * 
      * @see #getPagerAdapter()
@@ -49,7 +50,7 @@ public interface ViewPagerCreator {
     public abstract PagerAdapter onCreatePagerAdapter();
 
     /**
-     * Called once during {@link #onCreate(Bundle)}, the returned
+     * Called once during {@link Activity#onCreate(Bundle)}, the returned
      * {@code TabListener} is stored. <br />
      * <br />
      * The default implementation calls
@@ -63,7 +64,7 @@ public interface ViewPagerCreator {
     public abstract TabListener onCreateTabListener();
 
     /**
-     * Called once during {@link #onCreate(Bundle)}, the returned
+     * Called once during {@link Activity#onCreate(Bundle)}, the returned
      * {@code TabListener} is stored.<br />
      * <br />
      * The default implementation calls

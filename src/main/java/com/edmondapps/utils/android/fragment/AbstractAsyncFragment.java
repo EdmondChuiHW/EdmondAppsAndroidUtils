@@ -22,8 +22,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
-import com.actionbarsherlock.app.SherlockFragment;
-
 /**
  * A non-UI {@code Fragment} which manages {@link AsyncTask} across orientation
  * change. Attach this {@code Fragment} with
@@ -41,7 +39,7 @@ import com.actionbarsherlock.app.SherlockFragment;
  * @param <Progress>
  * @param <Result>
  */
-public abstract class AbstractAsyncFragment<Params, Progress, Result> extends SherlockFragment {
+public abstract class AbstractAsyncFragment<Params, Progress, Result> extends Fragment {
 
     private AsyncTask<Params, Progress, Result> mAsyncTask;
     private boolean mCancelTaskOnDestroy = true;
@@ -158,7 +156,6 @@ public abstract class AbstractAsyncFragment<Params, Progress, Result> extends Sh
      * 
      * @return the original {@link AsyncTask} instance returned by
      *         {@link #onCreateAsyncTask()}.
-     * @see #cancelAsyncTask(boolean)
      */
     protected AsyncTask<Params, Progress, Result> getAsyncTask() {
         return mAsyncTask;

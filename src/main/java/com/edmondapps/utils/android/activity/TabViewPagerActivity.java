@@ -21,12 +21,12 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.ActionBar.TabListener;
+import android.support.v7.app.ActionBar;
 import com.edmondapps.utils.android.R;
 import com.edmondapps.utils.android.actionbar.SimpleTabListener;
+
+import static android.support.v7.app.ActionBar.Tab;
+import static android.support.v7.app.ActionBar.TabListener;
 
 /**
  * Helper class for using {@link ViewPager} along with {@link Tab}. The default
