@@ -59,12 +59,8 @@ Check out the [sample app] [4] on the [Play store] [5].
 
 Dependencies
 ======================
-* [ActionBarSherlock] [1]  
-* [NineOldAndroids] [2]  
 * [google-gson] [3]  
 
-[1]: https://github.com/JakeWharton/ActionBarSherlock
-[2]: https://github.com/JakeWharton/NineOldAndroids
 [3]: https://code.google.com/p/google-gson/
 [4]: https://github.com/chuihinwai/EdmondAppsAndroidUtilsSample
 [5]: https://play.google.com/store/apps/details?id=com.edmondapps.android.sample
