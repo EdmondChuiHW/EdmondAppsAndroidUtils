@@ -115,7 +115,7 @@ public abstract class SinglePaneActivity extends UpableActivity {
      * super class's implementation of this method. If they do not, an
      * exception will be thrown.</i>
      * 
-     * @param t
+     * @param ft
      *            A {@link FragmentTransaction} to be committed right after this
      *            method returns.
      */

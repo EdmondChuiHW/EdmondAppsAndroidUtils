@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ed__ab_done"
-    style="?attr/actionButtonStyle"
+    style="?android:attr/actionButtonStyle"
     android:layout_width="0dp"
     android:layout_height="match_parent"
-    android:layout_weight="1"
-    android:background="?attr/selectableItemBackground"
-    android:paddingRight="20dp" >
+    android:layout_weight="1">
 
     <TextView
-        style="@style/Widget.Sherlock.ActionBar.TabText"
+        style="?android:actionBarTabTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:paddingRight="20dp"
         android:drawableLeft="@drawable/ic_action_done"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"

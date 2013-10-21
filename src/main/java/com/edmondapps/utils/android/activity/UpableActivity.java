@@ -15,12 +15,11 @@
  */
 package com.edmondapps.utils.android.activity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v4.app.FragmentActivity;
+import android.view.MenuItem;
 import com.edmondapps.utils.android.annotaion.ParentActivity;
 
 /**
@@ -41,7 +40,7 @@ import com.edmondapps.utils.android.annotaion.ParentActivity;
  * @author Edmond
  * 
  */
-public abstract class UpableActivity extends SherlockFragmentActivity {
+public abstract class UpableActivity extends FragmentActivity {
     /**
      * The key for passing a parent Activity with {@code Intent}.
      * 
@@ -65,7 +64,7 @@ public abstract class UpableActivity extends SherlockFragmentActivity {
         }
 
         if (mParentActivity != null) {
-            ActionBar actionBar = getSupportActionBar();
+            ActionBar actionBar = getActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }

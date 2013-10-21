@@ -15,8 +15,6 @@
  */
 package com.edmondapps.utils.android.view;
 
-import static com.nineoldandroids.view.ViewHelper.setAlpha;
-import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -26,8 +24,8 @@ import android.widget.ProgressBar;
  * fade out and the progress view to fade in. Calling {@link #doneLoading()}
  * does the opposite.
  * </p>
- * Use {@link LoadingViews#of(View, ProgressBar)} to obtain an instance.
- * 
+ * Use {@link LoadingViews#of(View, View)} to obtain an instance.
+ *
  * @author Edmond
  */
 public class LoadingViews {
@@ -39,7 +37,6 @@ public class LoadingViews {
     private final View mView;
     private final View mProgressBar;
     private final long mDuration;
-    private final RunnableAnimatorListener mListener = new RunnableAnimatorListener(true);
     private final Runnable mViewEndAction = new Runnable() {
         @Override
         public void run() {
@@ -49,14 +46,14 @@ public class LoadingViews {
     private final Runnable mProgressStartAction = new Runnable() {
         @Override
         public void run() {
-            setAlpha(mProgressBar, 0F);
+            mProgressBar.setAlpha(0F);
             mProgressBar.setVisibility(View.VISIBLE);
         }
     };
     private final Runnable mViewStartAction = new Runnable() {
         @Override
         public void run() {
-            setAlpha(mView, 0F);
+            mView.setAlpha(0F);
             mView.setVisibility(View.VISIBLE);
         }
     };
@@ -70,12 +67,10 @@ public class LoadingViews {
     /**
      * Creates an instance of {@link LoadingViews} with {@code DEFAULT_DURATION}
      * of {@value #DEFAULT_DURATION}.
-     * 
-     * @param view
-     *            the reference to the main content {@code View}.
-     * @param p
-     *            the reference to the {@code View} (usually
-     *            an indeterminate {@code ProgressBar})
+     *
+     * @param view the reference to the main content {@code View}.
+     * @param p    the reference to the {@code View} (usually
+     *             an indeterminate {@code ProgressBar})
      * @return
      */
     public static final LoadingViews of(View view, View p) {
@@ -97,13 +92,13 @@ public class LoadingViews {
      * animated with a fade in / fade out animation by default.
      */
     public void startLoading() {
-        animate(mProgressBar).alpha(1)
+        mProgressBar.animate().alpha(1)
                 .setDuration(mDuration)
-                .setListener(mListener.withStartAction(mProgressStartAction));
+                .withStartAction(mProgressStartAction);
 
-        animate(mView).alpha(0)
+        mView.animate().alpha(0)
                 .setDuration(mDuration)
-                .setListener(mListener.withEndAction(mViewEndAction));
+                .withEndAction(mViewEndAction);
     }
 
     /**
@@ -111,17 +106,16 @@ public class LoadingViews {
      * is animated with a fade in / fade out animation by default.
      */
     public void doneLoading() {
-        animate(mView).alpha(1)
+        mView.animate().alpha(1)
                 .setDuration(mDuration)
-                .setListener(mListener.withStartAction(mViewStartAction));
+                .withStartAction(mViewStartAction);
 
-        animate(mProgressBar).alpha(0)
+        mProgressBar.animate().alpha(0)
                 .setDuration(mDuration)
-                .setListener(mListener.withEndAction(mProgressEndAction));
+                .withEndAction(mProgressEndAction);
     }
 
     /**
-     * 
      * @return the same {@code View} passed to the constructor
      */
     public final View getView() {
@@ -129,20 +123,18 @@ public class LoadingViews {
     }
 
     /**
-     * 
      * @return the same {@code View} passed to the constructor or a
      *         {@link ProgressBar} if you used the
-     *         {@link LoadingViews#of(View, ProgressBar)} factory method.
+     *         {@link LoadingViews#of(View, View)} factory method.
      */
     public final View getProgressBar() {
         return mProgressBar;
     }
 
     /**
-     * 
      * @return the same value passed to the constructor or
      *         {@value #DEFAULT_DURATION} if you used the
-     *         {@link LoadingViews#of(View, ProgressBar)} factory method.
+     *         {@link LoadingViews#of(View, View)} factory method.
      */
     public final long getDuration() {
         return mDuration;

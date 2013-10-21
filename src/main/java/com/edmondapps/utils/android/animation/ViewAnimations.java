@@ -15,11 +15,6 @@
  */
 package com.edmondapps.utils.android.animation;
 
-import static com.nineoldandroids.view.ViewHelper.setScaleX;
-import static com.nineoldandroids.view.ViewHelper.setScaleY;
-import static com.nineoldandroids.view.ViewHelper.setTranslationX;
-import static com.nineoldandroids.view.ViewHelper.setTranslationY;
-import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -84,12 +79,12 @@ public class ViewAnimations {
                 final float widthScale = (float)oldWidth / v.getWidth();
                 final float heightScale = (float)oldHeight / v.getHeight();
 
-                setTranslationX(v, leftDelta);
-                setTranslationY(v, topDelta);
-                setScaleX(v, widthScale);
-                setScaleY(v, heightScale);
+                v.setTranslationX(leftDelta);
+                v.setTranslationY(topDelta);
+                v.setScaleX(widthScale);
+                v.setScaleY(heightScale);
 
-                animate(v).setDuration(duration)
+                v.animate().setDuration(duration)
                         .scaleX(1)
                         .scaleY(1)
                         .translationX(0)

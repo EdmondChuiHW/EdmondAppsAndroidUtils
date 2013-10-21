@@ -6,8 +6,7 @@ package com.edmondapps.utils.android.activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-
-import com.actionbarsherlock.app.SherlockActivity;
+import android.support.v4.app.FragmentActivity;
 import com.edmondapps.utils.android.R;
 
 /**
@@ -25,7 +24,7 @@ import com.edmondapps.utils.android.R;
  * @author Edmond
  * 
  */
-public abstract class ForwardActivity extends SherlockActivity {
+public abstract class ForwardActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -15,25 +15,25 @@
  */
 package com.edmondapps.utils.android.fragment;
 
-import static com.edmondapps.utils.android.view.ViewUtils.findView;
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.actionbarsherlock.app.ActionBar.TabListener;
-import com.actionbarsherlock.app.SherlockFragment;
 import com.edmondapps.utils.android.R;
 import com.edmondapps.utils.android.activity.ViewPagerCreator;
+
+import static com.edmondapps.utils.android.view.ViewUtils.findView;
 
 /**
  * @author Edmond
  * 
  */
-public abstract class ViewPagerFragment extends SherlockFragment implements ViewPagerCreator {
+public abstract class ViewPagerFragment extends Fragment implements ViewPagerCreator {
 
     private ViewPager mViewPagerV;
     private PagerAdapter mPagerAdapter;
@@ -82,12 +82,12 @@ public abstract class ViewPagerFragment extends SherlockFragment implements View
     }
 
     @Override
-    public TabListener onCreateTabListener() {
+    public ActionBar.TabListener onCreateTabListener() {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public TabListener getTabListener() {
+    public ActionBar.TabListener getTabListener() {
         throw new UnsupportedOperationException();
     }
 }

@@ -15,18 +15,16 @@
  */
 package com.edmondapps.utils.android.activity;
 
+import android.app.ActionBar;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.edmondapps.utils.android.R;
 import com.edmondapps.utils.android.actionbar.SimpleTabListener;
+
+import static android.app.ActionBar.Tab;
 
 /**
  * Helper class for using {@link ViewPager} along with {@link Tab}. The default
@@ -45,7 +43,7 @@ public abstract class TabViewPagerActivity extends UpableActivity implements Vie
     private ViewPager mViewPager;
     private boolean mTabsEnabled;
     private PagerAdapter mPagerAdapter;
-    private TabListener mTabListener;
+    private ActionBar.TabListener mTabListener;
     private OnPageChangeListener mOnPageChangeListener;
 
     @Override
@@ -78,7 +76,7 @@ public abstract class TabViewPagerActivity extends UpableActivity implements Vie
      * {@link #mPagerAdapter} and {@link #mTabListener} must not be null.
      */
     private void initTabs() {
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         int count = mPagerAdapter.getCount();
         for (int i = 0; i < count; i++) {
@@ -104,7 +102,7 @@ public abstract class TabViewPagerActivity extends UpableActivity implements Vie
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putInt(KEY_TAB_POS, getSupportActionBar().getSelectedNavigationIndex());
+        outState.putInt(KEY_TAB_POS, getActionBar().getSelectedNavigationIndex());
         outState.putInt(KEY_VIEW_PAGER_POS, mViewPager.getCurrentItem());
         outState.putBoolean(KEY_TABS_ENABLED, mTabsEnabled);
     }
@@ -123,7 +121,7 @@ public abstract class TabViewPagerActivity extends UpableActivity implements Vie
             mTabsEnabled = savedState.getBoolean(KEY_TABS_ENABLED);
             mViewPager.setCurrentItem(savedState.getInt(KEY_VIEW_PAGER_POS), true);
             if (mTabsEnabled) {
-                getSupportActionBar().setSelectedNavigationItem(savedState.getInt(KEY_TAB_POS));
+                getActionBar().setSelectedNavigationItem(savedState.getInt(KEY_TAB_POS));
             }
 
         } else {
@@ -132,10 +130,10 @@ public abstract class TabViewPagerActivity extends UpableActivity implements Vie
     }
 
     @Override
-    public TabListener onCreateTabListener() {
+    public ActionBar.TabListener onCreateTabListener() {
         return new SimpleTabListener() {
             @Override
-            public void onTabSelected(Tab tab, FragmentTransaction ft) {
+            public void onTabSelected(Tab tab, android.app.FragmentTransaction ft) {
                 mViewPager.setCurrentItem(tab.getPosition(), true);
             }
         };
@@ -147,7 +145,7 @@ public abstract class TabViewPagerActivity extends UpableActivity implements Vie
             @Override
             public void onPageSelected(int position) {
                 if (mTabsEnabled) {
-                    getSupportActionBar().setSelectedNavigationItem(position);
+                    getActionBar().setSelectedNavigationItem(position);
                 }
             }
         };
@@ -164,7 +162,7 @@ public abstract class TabViewPagerActivity extends UpableActivity implements Vie
     }
 
     @Override
-    public TabListener getTabListener() {
+    public ActionBar.TabListener getTabListener() {
         return mTabListener;
     }
 

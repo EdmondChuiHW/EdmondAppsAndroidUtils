@@ -15,29 +15,26 @@
  */
 package com.edmondapps.utils.android.actionbar;
 
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
 
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.ActionBar.TabListener;
+import android.app.ActionBar;
+import android.app.FragmentTransaction;
 
 /**
- * Skeleton class which implements {@link TabListener}. Extend this if you do
- * not intend to override every method of {@link TabListener}.
+ * Skeleton class which implements {@link ActionBar.TabListener TabListener}. Extend this if you do
+ * not intend to override every method of {@link ActionBar.TabListener TabListener}.
  * 
  * @author Edmond
- * @see SimpleOnPageChangeListener
  */
-public class SimpleTabListener implements TabListener {
+public class SimpleTabListener implements ActionBar.TabListener {
     @Override
-    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
     }
 
     @Override
-    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
     }
 
     @Override
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
     }
 }

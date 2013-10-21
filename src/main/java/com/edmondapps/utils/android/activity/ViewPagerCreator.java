@@ -15,14 +15,11 @@
  */
 package com.edmondapps.utils.android.activity;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.ActionBar.TabListener;
 
 /**
  * @author Edmond
@@ -60,7 +57,7 @@ public interface ViewPagerCreator {
      * 
      * @return a non-null {@code TabListener}
      */
-    public abstract TabListener onCreateTabListener();
+    public abstract ActionBar.TabListener onCreateTabListener();
 
     /**
      * Called once during {@link #onCreate(Bundle)}, the returned
@@ -94,7 +91,7 @@ public interface ViewPagerCreator {
      * @return the stored {@code TabListener} returned by
      *         {@link #onCreateTabListener()}
      */
-    public abstract TabListener getTabListener();
+    public abstract ActionBar.TabListener getTabListener();
 
     /**
      * 
