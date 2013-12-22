@@ -62,6 +62,7 @@ public abstract class DoneDiscardActivity extends SinglePaneActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setCustomView(view, new ActionBar.LayoutParams(MATCH_PARENT, MATCH_PARENT));
     }
 
