@@ -15,15 +15,15 @@
  */
 package com.edmondapps.utils.android.ui;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * An adapter that combines multiple adapters.
@@ -37,12 +37,11 @@ import android.widget.ListAdapter;
  * that is responsible for the position, and use
  * {@link #getPositionForAdapter(int)} to get the position for the adapter
  * (instead of the position in the {@code CoumpoundAdapter}).
- * <p>
+ * <p/>
  * You may also use {@link #getAdapterInfo(int)} and
  * {@link #getPositionForAdapter(int, AdapterInfo)} if the situation requires.
- * 
+ *
  * @author Edmond
- * 
  */
 public class CompoundAdapter extends BaseAdapter {
 
@@ -52,16 +51,15 @@ public class CompoundAdapter extends BaseAdapter {
      * Most of the time you don't have to interact with it, however, a common
      * use case is shown below, <code>
      * <pre>
-public Object getItem(int position) {                              
-    AdapterInfo info = getAdapterInfo(position);                   
-    int positionForAdapter = getPositionForAdapter(position, info);
-    return info.getAdapter().getItem(positionForAdapter);          
-}                                                                  
+     * public Object getItem(int position) {
+     * AdapterInfo info = getAdapterInfo(position);
+     * int positionForAdapter = getPositionForAdapter(position, info);
+     * return info.getAdapter().getItem(positionForAdapter);
+     * }
      * </pre>
      * </code>
-     * 
+     *
      * @author Edmond
-     * 
      */
     public static final class AdapterInfo {
         private final BaseAdapter mAdapter;
@@ -77,7 +75,6 @@ public Object getItem(int position) {
         }
 
         /**
-         * 
          * @return the adapter that this {@code AdapterInfo} is about
          */
         public BaseAdapter getAdapter() {
@@ -97,7 +94,6 @@ public Object getItem(int position) {
         }
 
         /**
-         * 
          * @return the position of this adapter in the {@code CompoundAdapter}
          */
         public final int getPosition() {
@@ -105,11 +101,10 @@ public Object getItem(int position) {
         }
 
         /**
-         * 
-         * @see ListAdapter#getItemViewType(int)
          * @return the internal view type offset that is used to distinguish
-         *         view types
-         *         of different adapters
+         * view types
+         * of different adapters
+         * @see ListAdapter#getItemViewType(int)
          */
         public final int getViewTypeOffset() {
             return mViewTypeOffset;
@@ -129,9 +124,8 @@ public Object getItem(int position) {
     /**
      * Constructs a {@code CompoundAdapter} that contains a single adapter. You
      * may use {@link #addAdapter(BaseAdapter)} later on.
-     * 
-     * @param adapter
-     *            a non-null instance of a {@code BaseAdapter}
+     *
+     * @param adapter a non-null instance of a {@code BaseAdapter}
      */
     public CompoundAdapter(BaseAdapter adapter) {
         AdapterInfo info = new AdapterInfo(adapter);
@@ -143,11 +137,9 @@ public Object getItem(int position) {
     /**
      * Constructs a {@code CompoundAdapter} that contains a 2 adapters. The
      * parameters order determines the order of the list from top to bottom.
-     * 
-     * @param adapter
-     *            the first non-null instance of a {@code BaseAdapter}
-     * @param adapter2
-     *            the second non-null instance of a {@code BaseAdapter}
+     *
+     * @param adapter  the first non-null instance of a {@code BaseAdapter}
+     * @param adapter2 the second non-null instance of a {@code BaseAdapter}
      */
     public CompoundAdapter(BaseAdapter adapter, BaseAdapter adapter2) {
         AdapterInfo info = new AdapterInfo(adapter);
@@ -161,13 +153,10 @@ public Object getItem(int position) {
     /**
      * Constructs a {@code CompoundAdapter} that contains more than 2 adapters.
      * The parameters order determines the order of the list from top to bottom.
-     * 
-     * @param adapter
-     *            the first non-null instance of a {@code BaseAdapter}
-     * @param adapter2
-     *            the second non-null instance of a {@code BaseAdapter}
-     * @param adapters
-     *            the other instances of {@code BaseAdapter}
+     *
+     * @param adapter  the first non-null instance of a {@code BaseAdapter}
+     * @param adapter2 the second non-null instance of a {@code BaseAdapter}
+     * @param adapters the other instances of {@code BaseAdapter}
      */
     public CompoundAdapter(BaseAdapter adapter, BaseAdapter adapter2, BaseAdapter... adapters) {
         AdapterInfo info = new AdapterInfo(adapter);
@@ -184,11 +173,8 @@ public Object getItem(int position) {
     }
 
     /**
-     * 
-     * @param position
-     *            the position of the {@code CompoundAdapter}
-     * @param info
-     *            usually retrieved by {@link #getAdapterInfo(int)}
+     * @param position the position of the {@code CompoundAdapter}
+     * @param info     usually retrieved by {@link #getAdapterInfo(int)}
      * @return the position of the adapter contained in the {@code AdapterInfo}
      */
     public final static int getPositionForAdapter(int position, AdapterInfo info) {
@@ -204,11 +190,8 @@ public Object getItem(int position) {
     }
 
     /**
-     * 
-     * @param position
-     *            the position of the {@code CompoundAdapter}
-     * @param info
-     *            usually retrieved by {@link #getAdapterInfo(int)}
+     * @param position the position of the {@code CompoundAdapter}
+     * @param info     usually retrieved by {@link #getAdapterInfo(int)}
      * @return the view type of the adapter contained in the {@code AdapterInfo}
      */
     public final static int getViewTypeForAdapter(int position, AdapterInfo info) {
@@ -227,10 +210,9 @@ public Object getItem(int position) {
     /**
      * Append an adapter to the end of this {@code CompoundAdapter}.<br>
      * This {@code CompoundAdapter} will also refresh itself.
-     * 
+     *
+     * @param adapter a non-null instance of a {@code BaseAdapter}
      * @see #notifyDataSetChanged()
-     * @param adapter
-     *            a non-null instance of a {@code BaseAdapter}
      */
     public void addAdapter(BaseAdapter adapter) {
         mAdapters.add(new AdapterInfo(adapter));
@@ -241,11 +223,10 @@ public Object getItem(int position) {
      * Performs a linear search of the adapters in this {@code CompoundAdapter}
      * to remove the provided adapter. If it does remove the adapter, this
      * adapter will refresh itself.
-     * 
-     * @see #notifyDataSetChanged()
-     * @param adapter
-     *            an instance of {@code BaseAdapter}
+     *
+     * @param adapter an instance of {@code BaseAdapter}
      * @return if it has removed the provided adapter
+     * @see #notifyDataSetChanged()
      */
     public boolean removeAdapter(BaseAdapter adapter) {
         Iterator<AdapterInfo> it = mAdapters.iterator();
@@ -269,17 +250,13 @@ public Object getItem(int position) {
             info.setPosition(count);
             info.setViewTypeOffset(viewTypeCount);
 
-            if (!info.isEmpty()) {
-                count += info.getCount();
-            }
+            count += info.getCount();
             viewTypeCount += info.getViewTypeCount();
         }
     }
 
     /**
-     * 
-     * @param position
-     *            position of the {@code CompoundAdapter}
+     * @param position position of the {@code CompoundAdapter}
      * @return the info about the adapter that is managing this position
      */
     public final AdapterInfo getAdapterInfo(int position) {
